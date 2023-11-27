@@ -1,0 +1,318 @@
+﻿@model CCRestitution.Models.Crime
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Crime</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Law_Ordinal" class="control-label"></label>
+                <input asp-for="Law_Ordinal" class="form-control" />
+                <span asp-validation-for="Law_Ordinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attempted_Class" class="control-label"></label>
+                <input asp-for="Attempted_Class" class="form-control" />
+                <span asp-validation-for="Attempted_Class" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attempted_VF_Indicator" class="control-label"></label>
+                <input asp-for="Attempted_VF_Indicator" class="form-control" />
+                <span asp-validation-for="Attempted_VF_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attempted_NYS_Law_Category" class="control-label"></label>
+                <input asp-for="Attempted_NYS_Law_Category" class="form-control" />
+                <span asp-validation-for="Attempted_NYS_Law_Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bus_Driver_Charge_Code" class="control-label"></label>
+                <input asp-for="Bus_Driver_Charge_Code" class="form-control" />
+                <span asp-validation-for="Bus_Driver_Charge_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sex_Offender_Registry_Code" class="control-label"></label>
+                <input asp-for="Sex_Offender_Registry_Code" class="form-control" />
+                <span asp-validation-for="Sex_Offender_Registry_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NCIC_Code" class="control-label"></label>
+                <input asp-for="NCIC_Code" class="form-control" />
+                <span asp-validation-for="NCIC_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UCR_Code" class="control-label"></label>
+                <input asp-for="UCR_Code" class="form-control" />
+                <span asp-validation-for="UCR_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SAFIS_Crime_Cateory_Code" class="control-label"></label>
+                <input asp-for="SAFIS_Crime_Cateory_Code" class="form-control" />
+                <span asp-validation-for="SAFIS_Crime_Cateory_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Offense_Category" class="control-label"></label>
+                <input asp-for="Offense_Category" class="form-control" />
+                <span asp-validation-for="Offense_Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JO_Indicator" class="control-label"></label>
+                <input asp-for="JO_Indicator" class="form-control" />
+                <span asp-validation-for="JO_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JD_Indicator" class="control-label"></label>
+                <input asp-for="JD_Indicator" class="form-control" />
+                <span asp-validation-for="JD_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IBR_Code" class="control-label"></label>
+                <input asp-for="IBR_Code" class="form-control" />
+                <span asp-validation-for="IBR_Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maxi_Law_Description" class="control-label"></label>
+                <input asp-for="Maxi_Law_Description" class="form-control" />
+                <span asp-validation-for="Maxi_Law_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Law_Description" class="control-label"></label>
+                <input asp-for="Law_Description" class="form-control" />
+                <span asp-validation-for="Law_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mini_Law_Description" class="control-label"></label>
+                <input asp-for="Mini_Law_Description" class="form-control" />
+                <span asp-validation-for="Mini_Law_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Section" class="control-label"></label>
+                <input asp-for="Section" class="form-control" />
+                <span asp-validation-for="Section" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Section13" class="control-label"></label>
+                <input asp-for="Section13" class="form-control" />
+                <span asp-validation-for="Section13" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sub_Section" class="control-label"></label>
+                <input asp-for="Sub_Section" class="form-control" />
+                <span asp-validation-for="Sub_Section" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sub_Section13" class="control-label"></label>
+                <input asp-for="Sub_Section13" class="form-control" />
+                <span asp-validation-for="Sub_Section13" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Degree" class="control-label"></label>
+                <input asp-for="Degree" class="form-control" />
+                <span asp-validation-for="Degree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFFECTIVE_DATE" class="control-label"></label>
+                <input asp-for="EFFECTIVE_DATE" class="form-control" />
+                <span asp-validation-for="EFFECTIVE_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REPEAL_DATE" class="control-label"></label>
+                <input asp-for="REPEAL_DATE" class="form-control" />
+                <span asp-validation-for="REPEAL_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FP_Offense" class="control-label"></label>
+                <input asp-for="FP_Offense" class="form-control" />
+                <span asp-validation-for="FP_Offense" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unconst_Date" class="control-label"></label>
+                <input asp-for="Unconst_Date" class="form-control" />
+                <span asp-validation-for="Unconst_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weapon_Charge" class="control-label"></label>
+                <input asp-for="Weapon_Charge" class="form-control" />
+                <span asp-validation-for="Weapon_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Armed_VFO_Charge" class="control-label"></label>
+                <input asp-for="Armed_VFO_Charge" class="form-control" />
+                <span asp-validation-for="Armed_VFO_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Minors_Charge" class="control-label"></label>
+                <input asp-for="Minors_Charge" class="form-control" />
+                <span asp-validation-for="Minors_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Career_Criminal_Charge" class="control-label"></label>
+                <input asp-for="Career_Criminal_Charge" class="form-control" />
+                <span asp-validation-for="Career_Criminal_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="INS_Charge" class="control-label"></label>
+                <input asp-for="INS_Charge" class="form-control" />
+                <span asp-validation-for="INS_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Non_Seal_Charge" class="control-label"></label>
+                <input asp-for="Non_Seal_Charge" class="form-control" />
+                <span asp-validation-for="Non_Seal_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sub_Convict_Charge" class="control-label"></label>
+                <input asp-for="Sub_Convict_Charge" class="form-control" />
+                <span asp-validation-for="Sub_Convict_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jail_Charge" class="control-label"></label>
+                <input asp-for="Jail_Charge" class="form-control" />
+                <span asp-validation-for="Jail_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Post_Convict_Charge" class="control-label"></label>
+                <input asp-for="Post_Convict_Charge" class="form-control" />
+                <span asp-validation-for="Post_Convict_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto_Strip_Charge" class="control-label"></label>
+                <input asp-for="Auto_Strip_Charge" class="form-control" />
+                <span asp-validation-for="Auto_Strip_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Full_Law_Description" class="control-label"></label>
+                <input asp-for="Full_Law_Description" class="form-control" />
+                <span asp-validation-for="Full_Law_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NYS_Law_Category" class="control-label"></label>
+                <input asp-for="NYS_Law_Category" class="form-control" />
+                <span asp-validation-for="NYS_Law_Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VF_Indicator" class="control-label"></label>
+                <input asp-for="VF_Indicator" class="form-control" />
+                <span asp-validation-for="VF_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Class" class="control-label"></label>
+                <input asp-for="Class" class="form-control" />
+                <span asp-validation-for="Class" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DNA_Indicator" class="control-label"></label>
+                <input asp-for="DNA_Indicator" class="form-control" />
+                <span asp-validation-for="DNA_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attempted_DNA_Indicator" class="control-label"></label>
+                <input asp-for="Attempted_DNA_Indicator" class="form-control" />
+                <span asp-validation-for="Attempted_DNA_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Escape_Charge" class="control-label"></label>
+                <input asp-for="Escape_Charge" class="form-control" />
+                <span asp-validation-for="Escape_Charge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hate_Crime" class="control-label"></label>
+                <input asp-for="Hate_Crime" class="form-control" />
+                <span asp-validation-for="Hate_Crime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date_Invalidated" class="control-label"></label>
+                <input asp-for="Date_Invalidated" class="form-control" />
+                <span asp-validation-for="Date_Invalidated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Terrorism_Indicator" class="control-label"></label>
+                <input asp-for="Terrorism_Indicator" class="form-control" />
+                <span asp-validation-for="Terrorism_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DMV_VTCode" class="control-label"></label>
+                <input asp-for="DMV_VTCode" class="form-control" />
+                <span asp-validation-for="DMV_VTCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AO_Indicator" class="control-label"></label>
+                <input asp-for="AO_Indicator" class="form-control" />
+                <span asp-validation-for="AO_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RTA_FP_Offense" class="control-label"></label>
+                <input asp-for="RTA_FP_Offense" class="form-control" />
+                <span asp-validation-for="RTA_FP_Offense" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MODIFIED_DATE" class="control-label"></label>
+                <input asp-for="MODIFIED_DATE" class="form-control" />
+                <span asp-validation-for="MODIFIED_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Civil_Confinement_Indicator" class="control-label"></label>
+                <input asp-for="Civil_Confinement_Indicator" class="form-control" />
+                <span asp-validation-for="Civil_Confinement_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attempted_CCI" class="control-label"></label>
+                <input asp-for="Attempted_CCI" class="form-control" />
+                <span asp-validation-for="Attempted_CCI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expanded_Law_Literal" class="control-label"></label>
+                <input asp-for="Expanded_Law_Literal" class="form-control" />
+                <span asp-validation-for="Expanded_Law_Literal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sexually_Motivated_Ind" class="control-label"></label>
+                <input asp-for="Sexually_Motivated_Ind" class="form-control" />
+                <span asp-validation-for="Sexually_Motivated_Ind" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MCDV_Charge_Indicator" class="control-label"></label>
+                <input asp-for="MCDV_Charge_Indicator" class="form-control" />
+                <span asp-validation-for="MCDV_Charge_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RDLR_Indicator" class="control-label"></label>
+                <input asp-for="RDLR_Indicator" class="form-control" />
+                <span asp-validation-for="RDLR_Indicator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Updated" class="control-label"></label>
+                <input asp-for="Updated" class="form-control" />
+                <span asp-validation-for="Updated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

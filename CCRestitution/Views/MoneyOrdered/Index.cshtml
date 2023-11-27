@@ -1,0 +1,221 @@
+﻿@model IEnumerable<CCRestitution.Models.MoneyOrdered>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opened)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Closed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EHM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FineAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FineOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinePayByDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FineCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MandatorySurchargeAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MandatorySurchargeOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MandatorySurchargePayByDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MandatorySurchargeCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EHMAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestitutionAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestitutionOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestitutionPayByDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestitutionCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherPayByDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurchargeAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurchargeOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurchargePayByDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurchargeCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupervisionFeeAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupervisionFeeOpenDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupervisionFeeCloseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opened)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Closed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EHM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FineAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FineOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinePayByDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FineCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MandatorySurchargeAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MandatorySurchargeOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MandatorySurchargePayByDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MandatorySurchargeCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EHMAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestitutionAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestitutionOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestitutionPayByDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestitutionCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherPayByDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurchargeAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurchargeOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurchargePayByDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SurchargeCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupervisionFeeAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupervisionFeeOpenDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupervisionFeeCloseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updated)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MoneyOrderedId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MoneyOrderedId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MoneyOrderedId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
