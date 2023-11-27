@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CCRestitution.Models.Account>
+﻿@model Pagination<CCRestitution.Models.Account>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,47 +12,21 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CaseNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Docket)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssignedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClosedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArrestDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgencyCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustodyStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Court)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Judge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
+            <th>Case Number</th>
+            <th>Docket Number</th>
+            <th>Type</th>
+            <th>Assigned Date</th>
+            <th>Closed Date</th>
+            <th>Arrest Date</th>
+            <th>Agency Code</th>
+            <th>Custody Status</th>
+            <th>Court</th>
+            <th>Judge</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Results) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CaseNumber)
@@ -64,13 +38,13 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AssignedDate)
+                @(item.AssignedDate.HasValue ? item.AssignedDate.Value.ToString("d") : "")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClosedDate)
+                @(item.ClosedDate.HasValue ? item.ClosedDate.Value.ToString("d") : "")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ArrestDate)
+                @(item.ArrestDate.HasValue ? item.ArrestDate.Value.ToString("d") : "")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AgencyCode)
@@ -79,16 +53,10 @@
                 @Html.DisplayFor(modelItem => item.CustodyStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Court.CourtId)
+                @Html.DisplayFor(modelItem => item.Court.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Judge.JudgeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
+                @Html.DisplayFor(modelItem => item.Judge.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AccountId">Edit</a> |

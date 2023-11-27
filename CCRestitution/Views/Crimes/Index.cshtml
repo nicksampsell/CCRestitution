@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CCRestitution.Models.Crime>
+﻿@model Pagination<CCRestitution.Models.Crime>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,363 +9,37 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <input type="text" name="search" value="@ViewBag.Search" />
+    <input type="submit" value="Search" />
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Law_Ordinal)
+                Section
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Attempted_Class)
+                Subsection
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attempted_VF_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attempted_NYS_Law_Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bus_Driver_Charge_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex_Offender_Registry_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NCIC_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UCR_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SAFIS_Crime_Cateory_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Offense_Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JO_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JD_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IBR_Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Maxi_Law_Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Law_Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mini_Law_Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Section)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Section13)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Section)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Section13)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Degree)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EFFECTIVE_DATE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.REPEAL_DATE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FP_Offense)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unconst_Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weapon_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Armed_VFO_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Minors_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Career_Criminal_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.INS_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Non_Seal_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sub_Convict_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Jail_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post_Convict_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Auto_Strip_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Full_Law_Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NYS_Law_Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VF_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Class)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DNA_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attempted_DNA_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Escape_Charge)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hate_Crime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date_Invalidated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Terrorism_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DMV_VTCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AO_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RTA_FP_Offense)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MODIFIED_DATE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Civil_Confinement_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attempted_CCI)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Expanded_Law_Literal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexually_Motivated_Ind)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MCDV_Charge_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RDLR_Indicator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
+            <th>Law Description</th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Results) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Law_Ordinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attempted_Class)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attempted_VF_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attempted_NYS_Law_Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bus_Driver_Charge_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex_Offender_Registry_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NCIC_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UCR_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SAFIS_Crime_Cateory_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Offense_Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JO_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JD_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IBR_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Maxi_Law_Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Law_Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mini_Law_Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Section)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Section13)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Sub_Section)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Section13)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Degree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EFFECTIVE_DATE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.REPEAL_DATE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FP_Offense)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unconst_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weapon_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Armed_VFO_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Minors_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Career_Criminal_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.INS_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Non_Seal_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Convict_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Jail_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Post_Convict_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Auto_Strip_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Full_Law_Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NYS_Law_Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VF_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Class)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DNA_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attempted_DNA_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Escape_Charge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hate_Crime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date_Invalidated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Terrorism_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DMV_VTCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AO_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RTA_FP_Offense)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MODIFIED_DATE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Civil_Confinement_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attempted_CCI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Expanded_Law_Literal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sexually_Motivated_Ind)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MCDV_Charge_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RDLR_Indicator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.Full_Law_Description)</td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

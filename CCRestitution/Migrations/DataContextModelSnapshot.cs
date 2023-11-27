@@ -78,6 +78,79 @@ namespace CCRestitution.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.AccountCrime", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountCrimeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CrimeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("CrimeId");
+
+                    b.ToTable("AccountCrime");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.Attorney", b =>
+                {
+                    b.Property<int>("AttorneyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttorneyId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AttorneyId");
+
+                    b.ToTable("Attorneys");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.Court", b =>
                 {
                     b.Property<int>("CourtId")
@@ -131,9 +204,6 @@ namespace CCRestitution.Migrations
 
                     b.Property<string>("AO_Indicator")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Armed_VFO_Charge")
                         .HasColumnType("nvarchar(max)");
@@ -308,8 +378,6 @@ namespace CCRestitution.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
-
                     b.ToTable("Crimes");
                 });
 
@@ -373,6 +441,98 @@ namespace CCRestitution.Migrations
                     b.ToTable("Defendants");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.DefendantPriorResidence", b =>
+                {
+                    b.Property<int>("DefendantPriorResidenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DefendantPriorResidenceId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DefendantId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReasonLeft")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WithName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WithRelationship")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DefendantPriorResidenceId");
+
+                    b.HasIndex("DefendantId");
+
+                    b.ToTable("DefendantPriorResidences");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.DetentionFacility", b =>
+                {
+                    b.Property<int>("DetentionFacilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetentionFacilityId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DetentionFacilityId");
+
+                    b.ToTable("DetentionFacilities");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.Judge", b =>
                 {
                     b.Property<int>("JudgeId")
@@ -391,6 +551,9 @@ namespace CCRestitution.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Updated")
@@ -566,6 +729,118 @@ namespace CCRestitution.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.ProbationDepartment", b =>
+                {
+                    b.Property<int>("ProbationDepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProbationDepartmentId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProbationDepartmentId");
+
+                    b.ToTable("ProbationDepartments");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.ProbationOfficer", b =>
+                {
+                    b.Property<int>("ProbationOfficerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProbationOfficerId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProbationDepartmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProbationOfficerId");
+
+                    b.HasIndex("ProbationDepartmentId");
+
+                    b.ToTable("ProbationOfficers");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.TreatmentAgency", b =>
+                {
+                    b.Property<int>("TreatmentAgencyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreatmentAgencyId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TreatmentAgencyId");
+
+                    b.ToTable("TreatmentAgencies");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -664,6 +939,61 @@ namespace CCRestitution.Migrations
                     b.ToTable("Victims");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.VictimPriorResidence", b =>
+                {
+                    b.Property<int>("VictimPriorResidenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VictimPriorResidenceId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FromDT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReasonLeft")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDT")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("VictimId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WithName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WithRelationship")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VictimPriorResidenceId");
+
+                    b.HasIndex("VictimId");
+
+                    b.ToTable("VictimPriorResidence");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.Account", b =>
                 {
                     b.HasOne("CCRestitution.Models.Court", "Court")
@@ -681,11 +1011,27 @@ namespace CCRestitution.Migrations
                     b.Navigation("Judge");
                 });
 
-            modelBuilder.Entity("CCRestitution.Models.Crime", b =>
+            modelBuilder.Entity("CCRestitution.Models.AccountCrime", b =>
                 {
                     b.HasOne("CCRestitution.Models.Account", null)
-                        .WithMany("Crimes")
-                        .HasForeignKey("AccountId");
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CCRestitution.Models.Crime", "Crime")
+                        .WithMany()
+                        .HasForeignKey("CrimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CCRestitution.Models.Crime", null)
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Crime");
                 });
 
             modelBuilder.Entity("CCRestitution.Models.Defendant", b =>
@@ -693,6 +1039,15 @@ namespace CCRestitution.Migrations
                     b.HasOne("CCRestitution.Models.Account", null)
                         .WithMany("Defendants")
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.DefendantPriorResidence", b =>
+                {
+                    b.HasOne("CCRestitution.Models.Defendant", "Defendant")
+                        .WithMany("PriorResidences")
+                        .HasForeignKey("DefendantId");
+
+                    b.Navigation("Defendant");
                 });
 
             modelBuilder.Entity("CCRestitution.Models.Judge", b =>
@@ -704,6 +1059,17 @@ namespace CCRestitution.Migrations
                     b.Navigation("Court");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.ProbationOfficer", b =>
+                {
+                    b.HasOne("CCRestitution.Models.ProbationDepartment", "ProbationDepartment")
+                        .WithMany("ProbationOfficers")
+                        .HasForeignKey("ProbationDepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProbationDepartment");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.Victim", b =>
                 {
                     b.HasOne("CCRestitution.Models.Account", null)
@@ -711,10 +1077,17 @@ namespace CCRestitution.Migrations
                         .HasForeignKey("AccountId");
                 });
 
+            modelBuilder.Entity("CCRestitution.Models.VictimPriorResidence", b =>
+                {
+                    b.HasOne("CCRestitution.Models.Victim", "Victim")
+                        .WithMany("PriorResidences")
+                        .HasForeignKey("VictimId");
+
+                    b.Navigation("Victim");
+                });
+
             modelBuilder.Entity("CCRestitution.Models.Account", b =>
                 {
-                    b.Navigation("Crimes");
-
                     b.Navigation("Defendants");
 
                     b.Navigation("Victims");
@@ -723,6 +1096,21 @@ namespace CCRestitution.Migrations
             modelBuilder.Entity("CCRestitution.Models.Court", b =>
                 {
                     b.Navigation("Judges");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.Defendant", b =>
+                {
+                    b.Navigation("PriorResidences");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.ProbationDepartment", b =>
+                {
+                    b.Navigation("ProbationOfficers");
+                });
+
+            modelBuilder.Entity("CCRestitution.Models.Victim", b =>
+                {
+                    b.Navigation("PriorResidences");
                 });
 #pragma warning restore 612, 618
         }

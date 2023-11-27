@@ -59,5 +59,6 @@
         public string? Sexually_Motivated_Ind { get; set; }
         public string? MCDV_Charge_Indicator { get; set; }
         public string? RDLR_Indicator { get; set; }
+        public List<Account> Accounts { get; set; }
     }
 }

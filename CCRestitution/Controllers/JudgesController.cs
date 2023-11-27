@@ -48,7 +48,7 @@ namespace CCRestitution.Controllers
         // GET: Judges/Create
         public IActionResult Create()
         {
-            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "CourtId");
+            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "Title");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace CCRestitution.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("JudgeId,FirstName,LastName,CourtId,Created,Updated")] Judge judge)
+        public async Task<IActionResult> Create([Bind("JudgeId,FirstName,MiddleName,LastName,CourtId")] Judge judge)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace CCRestitution.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "CourtId", judge.CourtId);
+            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "Title", judge.CourtId);
             return View(judge);
         }
 
@@ -82,7 +82,7 @@ namespace CCRestitution.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "CourtId", judge.CourtId);
+            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "Title", judge.CourtId);
             return View(judge);
         }
 
@@ -91,7 +91,7 @@ namespace CCRestitution.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("JudgeId,FirstName,LastName,CourtId,Created,Updated")] Judge judge)
+        public async Task<IActionResult> Edit(int id, [Bind("JudgeId,FirstName,MiddleName,LastName,CourtId")] Judge judge)
         {
             if (id != judge.JudgeId)
             {
@@ -118,7 +118,7 @@ namespace CCRestitution.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "CourtId", judge.CourtId);
+            ViewData["CourtId"] = new SelectList(_context.Courts, "CourtId", "Title", judge.CourtId);
             return View(judge);
         }
 

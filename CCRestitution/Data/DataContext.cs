@@ -11,16 +11,30 @@ namespace CCRestitution.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.Crimes)
+                .WithMany(x => x.Accounts)
+                .UsingEntity<AccountCrime>(
+                l => l.HasOne<Crime>().WithMany().HasForeignKey("Id"),
+                r => r.HasOne<Account>().WithMany().HasForeignKey("AccountId"));
         
         }
 
         public DbSet<Account> Accounts { get; set; } = default!;
+        public DbSet<ArrestingAgency> ArrestingAgencies { get; set; } = default!;
+        public DbSet<Attorney> Attorneys { get; set; } = default!;
         public DbSet<Court> Courts { get; set; } = default!;
         public DbSet<Crime> Crimes { get; set; } = default!;
         public DbSet<Defendant> Defendants { get; set; } = default!;
+        public DbSet<DefendantPriorResidence> DefendantPriorResidences { get; set; } = default!;
+        public DbSet<DetentionFacility> DetentionFacilities { get; set; } = default!;
         public DbSet<Judge> Judges { get; set; } = default!;
         public DbSet<MoneyOrdered> MoneyOrdered { get; set; }
         public DbSet<Payment> Payments { get; set; } = default!;
+        public DbSet<ProbationDepartment> ProbationDepartments { get; set; } = default!;
+        public DbSet<ProbationOfficer> ProbationOfficers { get; set; } = default!;
+        public DbSet<TreatmentAgency> TreatmentAgencies { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
         public DbSet<Victim> Victims { get; set; } = default!;
 

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCRestitution.Data;
 using CCRestitution.Models;
+using Pagination.EntityFrameworkCore.Extensions;
+using System.Runtime.Serialization;
 
 namespace CCRestitution.Controllers
 {
@@ -20,9 +22,25 @@ namespace CCRestitution.Controllers
         }
 
         // GET: Crimes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 200)
         {
-            return View(await _context.Crimes.ToListAsync());
+            var crimes = _context.Crimes.AsQueryable();
+            var totalCrimes = await _context.Crimes.CountAsync();
+
+            if (search != null)
+            {
+
+                crimes = crimes.Where(x => x.Section.Contains(search) || x.Sub_Section13.Contains(search) || x.Sub_Section.Contains(search) || x.Section13.Contains(search) || x.Full_Law_Description.Contains(search) || x.Law_Description.Contains(search) || x.Law_Ordinal.Contains(search) || x.Maxi_Law_Description.Contains(search) || x.Mini_Law_Description.Contains(search));
+
+                totalCrimes = await _context.Crimes.Where(x => x.Section.Contains(search) || x.Sub_Section13.Contains(search) || x.Sub_Section.Contains(search) || x.Section13.Contains(search) || x.Full_Law_Description.Contains(search) || x.Law_Description.Contains(search) || x.Law_Ordinal.Contains(search) || x.Maxi_Law_Description.Contains(search) || x.Mini_Law_Description.Contains(search)).CountAsync();
+            }
+
+           
+            ViewBag.PerPage = perPage;
+            ViewBag.Search = search;
+
+
+            return View(new Pagination<Crime>(await crimes.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), totalCrimes, page, perPage));
         }
 
         // GET: Crimes/Details/5

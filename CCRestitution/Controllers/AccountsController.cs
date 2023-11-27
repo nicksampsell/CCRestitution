@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCRestitution.Data;
 using CCRestitution.Models;
+using Pagination.EntityFrameworkCore.Extensions;
 
 namespace CCRestitution.Controllers
 {
@@ -20,10 +21,22 @@ namespace CCRestitution.Controllers
         }
 
         // GET: Accounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 100)
         {
-            var dataContext = _context.Accounts.Include(a => a.Court).Include(a => a.Judge);
-            return View(await dataContext.ToListAsync());
+            var query = _context.Accounts.Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).AsQueryable();
+
+            var total = await _context.Accounts.CountAsync();
+
+            if (search != null)
+            {
+                query = query.Where(x => x.Docket.Contains(search) || x.Judge.FirstName.Contains(search) || x.Judge.LastName.Contains(search) || x.Court.Title.Contains(search));
+
+                total = await _context.Accounts.Where(x => x.Docket.Contains(search) || x.Judge.FirstName.Contains(search) || x.Judge.LastName.Contains(search) || x.Court.Title.Contains(search)).CountAsync();
+            }
+
+            query = query.OrderByDescending(x => x.AssignedDate);
+
+            return View(new Pagination<Account>(await query.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), total, page, perPage));
         }
 
         // GET: Accounts/Details/5
