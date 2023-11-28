@@ -6,8 +6,11 @@ namespace CCRestitution.Models
     {
         public int PaymentId { get; set; }
         public int UserId { get; set; }
+        public User? User { get; set; }
         [Display(Name = "Account Number")]
-        public int? AccountNumber { get; set; }
+        public int? AccountId { get; set; }
+
+        public Account? Account { get; set; }
         [Display(Name = "Payment Date")]
         public DateTime? DatePaid { get; set; }
         [Display(Name = "Amount Towards Fine")]

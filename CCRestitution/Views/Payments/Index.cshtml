@@ -1,56 +1,19 @@
 ﻿@model IEnumerable<CCRestitution.Models.Payment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Recent Payments";
+    Layout = "SubLayouts/_Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccountNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatePaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FineAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MandatorySurchargeAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EHMAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RestitutionAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SurchargeAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OtherAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SupervisionFee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
+            <th>Payment ID</th>
+            <th>Account ID</th>
+            <th>Docket #</th>
+            <th>Amount Paid</th>
+            <th>Date Paid</th>
+            <th>Submitted By</th>
+            
             <th></th>
         </tr>
     </thead>
@@ -58,43 +21,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.PaymentId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountNumber)
+                @Html.DisplayFor(modelItem => item.AccountId)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Docket)
+            </td>
+            <td></td>
             <td>
                 @Html.DisplayFor(modelItem => item.DatePaid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FineAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MandatorySurchargeAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EHMAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestitutionAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SurchargeAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OtherAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupervisionFee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
+                @Html.DisplayFor(modelItem => item.User.FullName);
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |

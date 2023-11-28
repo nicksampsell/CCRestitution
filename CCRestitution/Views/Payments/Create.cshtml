@@ -1,82 +1,137 @@
 ﻿@model CCRestitution.Models.Payment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Take Payment";
+    Layout = "SubLayouts/_Editor";
 }
 
-<h1>Create</h1>
-
-<h4>Payment</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
+            <div class="row mb-5">
+                <div class="col-8">
+                <div class="form-group">
+                    <label asp-for="AccountId" class="control-label"></label>
+                    <select asp-for="AccountId" class="form-control"></select>
+                    <span asp-validation-for="AccountId" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AccountNumber" class="control-label"></label>
-                <input asp-for="AccountNumber" class="form-control" />
-                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="DatePaid" class="control-label"></label>
+                    <input asp-for="DatePaid" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                    <span asp-validation-for="DatePaid" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DatePaid" class="control-label"></label>
-                <input asp-for="DatePaid" class="form-control" />
-                <span asp-validation-for="DatePaid" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                  <label for="TotalAmount" class="control-label">Total Amount</label>
             </div>
-            <div class="form-group">
-                <label asp-for="FineAmount" class="control-label"></label>
-                <input asp-for="FineAmount" class="form-control" />
-                <span asp-validation-for="FineAmount" class="text-danger"></span>
+            <div class="col-9">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="text" id="TotalAmount" class="form-control" pattern="^\d*(\.\d{0,2})?$" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="MandatorySurchargeAmount" class="control-label"></label>
-                <input asp-for="MandatorySurchargeAmount" class="form-control" />
-                <span asp-validation-for="MandatorySurchargeAmount" class="text-danger"></span>
+        </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="FineAmount" class="control-label">Fine</label>
+                </div>
+                <div class="col-9">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text fine" id="basic-addon1">$</span>
+                        <input asp-for="FineAmount" class="form-control fine" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="FineAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EHMAmount" class="control-label"></label>
-                <input asp-for="EHMAmount" class="form-control" />
-                <span asp-validation-for="EHMAmount" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="MandatorySurchargeAmount" class="control-label">Mandatory Surcharge</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text mandatorySurcharge" id="basic-addon1">$</span>
+                        <input asp-for="MandatorySurchargeAmount" class="form-control mandatorySurcharge" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="MandatorySurchargeAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RestitutionAmount" class="control-label"></label>
-                <input asp-for="RestitutionAmount" class="form-control" />
-                <span asp-validation-for="RestitutionAmount" class="text-danger"></span>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="EHMAmount" class="control-label">EHM</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text ehm" id="basic-addon1">$</span>
+                        <input asp-for="EHMAmount" class="form-control ehm" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="EHMAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="SurchargeAmount" class="control-label"></label>
-                <input asp-for="SurchargeAmount" class="form-control" />
-                <span asp-validation-for="SurchargeAmount" class="text-danger"></span>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="RestitutionAmount" class="control-label">Restitution</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text restitution" id="basic-addon1">$</span>
+                        <input asp-for="RestitutionAmount" class="form-control restitution" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="RestitutionAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="OtherAmount" class="control-label"></label>
-                <input asp-for="OtherAmount" class="form-control" />
-                <span asp-validation-for="OtherAmount" class="text-danger"></span>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="SurchargeAmount" class="control-label">5% Surcharge</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text surcharge5" id="basic-addon1">$</span>
+                        <input asp-for="SurchargeAmount" class="form-control surcharge5" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="SurchargeAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="SupervisionFee" class="control-label"></label>
-                <input asp-for="SupervisionFee" class="form-control" />
-                <span asp-validation-for="SupervisionFee" class="text-danger"></span>
+            <div class="row">
+               <div class="col-3">
+                    <label asp-for="OtherAmount" class="control-label">Misc. Charges</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text miscFee" id="basic-addon1">$</span>
+                        <input asp-for="OtherAmount" class="form-control miscFee" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="OtherAmount" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <input asp-for="Notes" class="form-control" />
-                <span asp-validation-for="Notes" class="text-danger"></span>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="SupervisionFee" class="control-label">Supervision Fee</label>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text supvFee" id="basic-addon1">$</span>
+                        <input asp-for="SupervisionFee" class="form-control supvFee" pattern="^\d*(\.\d{0,2})?$" />
+                    </div>
+                    <span asp-validation-for="SupervisionFee" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
-                <span asp-validation-for="Created" class="text-danger"></span>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Notes" class="control-label"></label>
+                </div>
+                <div class="col">
+                    <textarea asp-for="Notes" class="form-control"></textarea>
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Updated" class="control-label"></label>
-                <input asp-for="Updated" class="form-control" />
-                <span asp-validation-for="Updated" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -90,4 +145,139 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="~/lib/money.js/money.min.js"></script>
+    
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#AccountId').select2({
+                ajax: {
+                    selectionCssClass: "select2--small",
+                    dropdownCssClass: "select2--small",
+                    url: '/api/Accounts/Search',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var query = {
+                            search: params.term
+                        }
+
+                        return query;
+                    },
+                    processResults: function (data) {
+                        data = $.map(data, function (res) {
+                            res.id = res.accountId
+                            res.text = `${res.docket} - ${(res.defendants.length > 1) ? res.defendants.map(x => x.fullName + ', ') : res.defendants[0].fullName }`
+                            return res;
+                        });
+                        return {
+                            results: data
+                        };
+                    },
+                },
+                placeholder: "Search for an account by first name, last name, or docket #",
+                minimumInputLength: 2,
+                templateSelection: formatSelection,
+                templateResult: formatResult,
+                theme: "bootstrap-5"
+            }).on('select2:select', function (e) {
+                var data = e.params.data;
+
+            });
+        });
+
+        function formatSelection(sel = null) {
+            if (sel == null || sel == undefined || sel == "" ||
+                sel.text == undefined) {
+                return 'Search for an account by first name, last name, or docket #'
+            }
+
+            if (sel.loading) {
+                return sel.text;
+            }
+
+            console.log(sel);
+            return sel.text;
+        }
+
+        function formatResult(sel) {
+
+            console.log(sel)
+
+
+            if (sel.loading) {
+                return sel.text;
+            }
+            return sel.text;
+        }
+        
+
+
+        var initial = false;
+        var totalField = document.getElementById('TotalAmount');
+        var surcharge = document.getElementById('SurchargeAmount');
+        var restitution = document.getElementById('RestitutionAmount');
+        var mandatory = document.getElementById('MandatorySurchargeAmount');
+        var ehm = document.getElementById('EHMAmount');
+        var otherAmountField = document.getElementById('OtherAmount');
+        var supervision = document.getElementById('SupervisionFee');
+
+
+        var totalAmount = 0;
+        var surchargeAmount = 0;
+        var restitutionAmount = 0;
+        var mandatoryAmount = 0;
+        var ehmAmount = 0;
+        var otherAmount = 0;
+        var supervisionAmount = 0;
+
+
+        supervision.addEventListener('keyUp', e => {
+            supervisionAmount = e.target.value;
+            shiftFunds();
+        })
+
+        otherAmountField.addEventListener('keyup', e => {
+            otherAmount = e.target.value;
+            shiftFunds();
+        })
+
+        ehm.addEventListener('keyup', e => {
+            ehmAmount = e.target.value;
+            shiftFunds();
+        })
+
+        mandatory.addEventListener('keyup', e => {
+            mandatoryAmount = e.target.value;
+            shiftFunds();
+        })
+
+        function shiftFunds() { 
+            restitutionAmount = totalAmount - surchargeAmount - mandatoryAmount - ehmAmount - otherAmount - supervisionAmount;
+            restitution.value = restitutionAmount;
+        }
+
+
+        totalField.addEventListener('keyup', function (event) {
+            if(!initial)
+            {
+
+                totalAmount = event.target.value;
+                surchargeAmount = totalAmount * .05;
+                restitutionAmount = totalAmount - surchargeAmount;
+
+                surcharge.value = surchargeAmount;
+                restitution.value = restitutionAmount;
+
+
+
+            }
+            //initial = true;
+        });
+
+
+
+    </script>
 }

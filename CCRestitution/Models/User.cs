@@ -19,6 +19,8 @@ namespace CCRestitution.Models
         [EmailAddress]
         public string? Email { get; set; }
         public UserRole Role { get; set; } = UserRole.User;
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 
     public enum UserRole

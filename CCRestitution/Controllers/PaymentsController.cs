@@ -22,7 +22,7 @@ namespace CCRestitution.Controllers
         // GET: Payments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Payments.ToListAsync());
+            return View(await _context.Payments.Include(x => x.Account).Include(x => x.User).ToListAsync());
         }
 
         // GET: Payments/Details/5

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "money.js@0.1.3",
+      "destination": "wwwroot/lib/money.js/"
+    }
+  ]
+}

@@ -117,3 +117,25 @@ svg.bi {
 table .btn-sm, table .btn-sm {
     margin-bottom: .25rem;
 }
+
+.fine {
+    border-color: #99ccff;
+}
+.mandatorySurcharge {
+    border-color: #33cccc
+}
+.ehm{
+    border-color: #33cccc
+}
+.restitution {
+    border-color: #FFCC11
+}
+.surcharge5 {
+    border-color: #cc9aff
+}
+.miscFee {
+    border-color: #ff99cc
+}
+.supvFee {
+    border-color: #ffcc99
+}
