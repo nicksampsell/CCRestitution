@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@await Html.PartialAsync("PageHeader",ViewData)
+<div class="relative overflow-x-auto">
+        @RenderBody()
+
+        @{
+            var totalItemsProperty = ViewData.Model?.GetType().GetProperty("TotalItems");
+        }
+
+        @if (totalItemsProperty != null)
+        {
+            <Partial name="_Pagination" model="ViewData.Model" />
+        }
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        function setQueryParameters(e) {
+            e.preventDefault();
+            const url = new URL(window.location.href);
+            url.searchParams.set('perPage', e.target.value);
+            window.location = url;
+        }
+    </script>
+}

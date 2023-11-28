@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_Layout";
+}
+@await Html.PartialAsync("PageHeader",ViewData)
+<div class="content">
+    <div class="shadow">
+        @RenderBody()
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", false)
+}

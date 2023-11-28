@@ -1,15 +1,31 @@
 ﻿@model Pagination<CCRestitution.Models.Account>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Cases";
+    Layout = "SubLayouts/_Index";
 }
 
-<h1>Index</h1>
+<form asp-action="Index" method="get">
+<div class="d-flex flex-row justify-content-between align-items-center">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    <div class="form-floating mb-3 flex-grow-1 me-1">
+        <input type="text" class="form-control" id="docket" name="docket" value="@ViewBag.Docket">
+        <label for="docket">Docket #</label>
+    </div>
+    <div class="form-floating mb-3 flex-grow-1 me-1">
+        <input type="text" class="form-control" id="fname" name="fname" value="@ViewBag.FName">
+        <label for="fname">First Name</label>
+    </div>
+    <div class="form-floating mb-3 flex-grow-1 me-1">
+        <input type="text" class="form-control" id="lname" name="lname" value="@ViewBag.LName">
+        <label for="lname">Last Name</label>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Search" />
+
+</div>
+</form>
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Case Number</th>
@@ -22,6 +38,8 @@
             <th>Custody Status</th>
             <th>Court</th>
             <th>Judge</th>
+            <th>Defendants</th>
+            <th>Victims</th>
             <th></th>
         </tr>
     </thead>
@@ -57,6 +75,28 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Judge.FullName)
+            </td>
+            <td>
+                @if(item.Defendants.Count > 0)
+                {
+                    <ul>
+                        @foreach(var defendant in item.Defendants)
+                            {
+                                <li>@defendant.FirstName @defendant.MiddleName @defendant.LastName</li>
+                            }
+                        </ul>        
+                }
+            </td>
+            <td>
+                @if (item.Victims.Count > 0)
+                {
+                    <ul>
+                        @foreach (var victim in item.Victims)
+                        {
+                            <li>@victim.FirstName @victim.MiddleName @victim.LastName ($@victim.AmountDue)</li>
+                        }
+                    </ul>
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AccountId">Edit</a> |

@@ -21,22 +21,38 @@ namespace CCRestitution.Controllers
         }
 
         // GET: Accounts
-        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 100)
+        public async Task<IActionResult> Index(string search = "", string? docket = null, string? fname = null, string? lname = null, int page = 1, int perPage = 100)
         {
-            var query = _context.Accounts.Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).AsQueryable();
-
-            var total = await _context.Accounts.CountAsync();
+            var query = _context.Accounts.AsSplitQuery().Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).Include(x => x.Victims.OrderBy(x => x.AmountDue)).AsQueryable();
 
             if (search != null)
             {
                 query = query.Where(x => x.Docket.Contains(search) || x.Judge.FirstName.Contains(search) || x.Judge.LastName.Contains(search) || x.Court.Title.Contains(search));
+            }
 
-                total = await _context.Accounts.Where(x => x.Docket.Contains(search) || x.Judge.FirstName.Contains(search) || x.Judge.LastName.Contains(search) || x.Court.Title.Contains(search)).CountAsync();
+
+            if (docket != null)
+            {
+                query = query.Where(x => x.Docket.Contains(docket));
+            }
+
+            if (fname != null)
+            {
+                query = query.Where(x => x.Defendants.Any(y => y.FirstName.Contains(fname)));
+            }
+
+            if (lname != null)
+            {
+                query = query.Where(x => x.Defendants.Any(y => y.LastName.Contains(lname)));
             }
 
             query = query.OrderByDescending(x => x.AssignedDate);
+            ViewBag.PerPage = perPage;
+            ViewBag.Docket = docket;
+            ViewBag.FName = fname;
+            ViewBag.LName = lname;
 
-            return View(new Pagination<Account>(await query.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), total, page, perPage));
+            return View(new Pagination<Account>(await query.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), await query.CountAsync(), page, perPage));
         }
 
         // GET: Accounts/Details/5

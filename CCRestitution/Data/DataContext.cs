@@ -18,6 +18,24 @@ namespace CCRestitution.Data
                 .UsingEntity<AccountCrime>(
                 l => l.HasOne<Crime>().WithMany().HasForeignKey("Id"),
                 r => r.HasOne<Account>().WithMany().HasForeignKey("AccountId"));
+
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.Defendants)
+                .WithMany(x => x.Accounts)
+                .UsingEntity<AccountDefendant>();
+
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.Victims)
+                .WithMany(x => x.Accounts)
+                .UsingEntity<AccountVictim>();
+
+            modelBuilder.Entity<Victim>()
+                .HasMany<VictimPriorResidence>(x => x.PriorResidences)
+                .WithOne(x => x.Victim);
+
+            modelBuilder.Entity<Defendant>()
+                .HasMany<DefendantPriorResidence>(x => x.PriorResidences)
+                .WithOne(x => x.Defendant);
         
         }
 

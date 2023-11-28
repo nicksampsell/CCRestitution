@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CCRestitution.Models
 {
@@ -27,7 +28,9 @@ namespace CCRestitution.Models
         [Display(Name ="Zip Code")]
         public string? ZipCode { get; set; }
 
-        public List<DefendantPriorResidence> PriorResidences { get; set; }
+        public List<DefendantPriorResidence> PriorResidences { get; set; } = new List<DefendantPriorResidence>();
+        public List<Account> Accounts { get; set; } = new List<Account>();
+        
 
     }
 }

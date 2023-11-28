@@ -4,11 +4,17 @@ using CCRestitution.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+}).AddRazorOptions(options => {
+    options.ViewLocationFormats.Add("/{0}.cshtml");
+    options.ViewLocationFormats.Add("/Views/Shared/LayoutPartials/{0}.cshtml");
+});
 
 builder.Services.AddRazorPages();
 

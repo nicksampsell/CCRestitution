@@ -26,7 +26,8 @@ namespace CCRestitution.Models
         [Display(Name = "Amount Paid")]
         public decimal? AmountPaid { get; set; }
         public string? Notes { get; set; }
-        public List<VictimPriorResidence> PriorResidences { get; set; }
+        public List<VictimPriorResidence> PriorResidences { get; set; } = new List<VictimPriorResidence>();
+        public List<Account> Accounts { get; set; } = new List<Account>();
 
     }
 }
