@@ -9,6 +9,10 @@
     {
       "library": "dinero.js@1.9.1",
       "destination": "wwwroot/lib/dinero.js/"
+    },
+    {
+      "library": "axios@1.6.2",
+      "destination": "wwwroot/lib/axios/"
     }
   ]
 }

@@ -29,54 +29,59 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Results) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiddleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suffix)
-            </td>
-            <td>
-                @(item.DOB.HasValue ? item.DOB.Value.ToString("d") : "")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suffix)
+                </td>
+                <td>
+                    @(item.DOB.HasValue ? item.DOB.Value.ToString("d") : "")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
                     @if (item.Address1 != null)
                     {
-                        @item.Address1<br />
+                        @item.Address1
+
+                        <br />
                     }
                     @if (item.Address2 != null)
                     {
-                        @item.Address2<br />
+                        @item.Address2
+
+                        <br />
                     }
                     @((item.City != null) ? $"{item.City}," : "") @item.State @item.ZipCode
-            </td>
-            <td>
-                @if(item.Accounts.Count > 0)
-                {
-                    <ul>
-                    @foreach(var account in item.Accounts)
+                </td>
+                <td>
+                    @if (item.Accounts.Count > 0)
                     {
-                         <li><a asp-controller="Accounts" asp-action="Details" asp-route-id="@account.AccountId">@account.Docket</a></li>       
+                        <ul>
+                            @foreach (var account in item.Accounts)
+                            {
+                                <li><a asp-controller="Accounts" asp-action="Details" asp-route-id="@account.AccountId">@account.Docket</a></li>
+                            }
+                        </ul>
                     }
-                    </ul>
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DefendantId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DefendantId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DefendantId">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DefendantId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DefendantId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DefendantId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

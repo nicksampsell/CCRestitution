@@ -27,8 +27,6 @@ namespace CCRestitution.Models
         public string? State { get; set; }
         [Display(Name = "Zip Code")]
         public string? ZipCode { get; set; }
-        public DateTime? Created { get; set; }
-        public DateTime? Updated { get; set; }
         public int? LegacyCaseNumber { get; set; }
         public string? NYSID { get; set; }
         public string? FBI { get; set; }
@@ -64,6 +62,30 @@ namespace CCRestitution.Models
 
         public List<DefendantPriorResidence> PriorResidences { get; set; } = new List<DefendantPriorResidence>();
         public List<Account> Accounts { get; set; } = new List<Account>();
+
+        public string FullName
+        {
+            get
+            {
+
+                string _name;
+                if(MiddleName != null)
+                {
+                    _name = $"{FirstName} {MiddleName} {LastName}";
+                }
+                else
+                {
+                    _name = $"{FirstName} {LastName}";
+                }
+
+                if(Suffix != null)
+                {
+                    _name = $"{_name} {Suffix}";
+                }
+
+                return _name;
+            }
+        }
         
 
     }

@@ -25,8 +25,21 @@ namespace CCRestitution.Controllers.Api
             {
                 AccountId = x.AccountId,
                 Docket = x.Docket,
-                Defendants = x.Defendants.Select(y => new AccountSearchDefendant { FullName = $"{y.FirstName} {y.MiddleName} {y.LastName}" }).ToList()
+                Defendants = x.Defendants.Select(y => new AccountSearchDefendant { FullName = $"{y.FirstName} {y.MiddleName} {y.LastName}", DefendantId = y.DefendantId }).ToList()
             }).ToListAsync();
+        }
+
+        [HttpGet("{id}/GetDefendants")]
+        public async Task<List<AccountSearchDefendant>> GetDefendantsByAccount(int id)
+        {
+            var account = await _context.Accounts.Include(x => x.Defendants).Where(x => x.AccountId == id).SingleOrDefaultAsync();
+
+            if(account == null)
+            {
+                return new List<AccountSearchDefendant>();
+            }
+
+            return account.Defendants.Select(y => new AccountSearchDefendant { DefendantId = y.DefendantId, FullName = y.FullName }).ToList();
         }
 
     }
@@ -42,6 +55,7 @@ namespace CCRestitution.Controllers.Api
 
     public class AccountSearchDefendant
     {
+        public int DefendantId { get; set; }
         public string FullName { get; set; }
     }
 }
