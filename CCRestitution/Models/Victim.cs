@@ -18,6 +18,8 @@ namespace CCRestitution.Models
         [Display(Name = "Apartment, Suite, Floor, etc. (Optional)")]
         public string? Address2 { get; set; }
         public string? City { get; set; }
+
+        public string? State { get; set; }
         [Display(Name = "Zip Code")]
         public string? ZipCode { get; set; }
         public string? Type { get; set; }

@@ -1,21 +1,17 @@
 ﻿@model Pagination<CCRestitution.Models.Crime>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Manage Crimes";
+    Layout = "SubLayouts/_Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <form asp-action="Index" method="get">
     <input type="text" name="search" value="@ViewBag.Search" />
     <input type="submit" value="Search" />
 </form>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>

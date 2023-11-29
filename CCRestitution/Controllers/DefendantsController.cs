@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCRestitution.Data;
 using CCRestitution.Models;
+using Pagination.EntityFrameworkCore.Extensions;
 
 namespace CCRestitution.Controllers
 {
@@ -20,9 +21,30 @@ namespace CCRestitution.Controllers
         }
 
         // GET: Defendants
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "", string? fName = null, string? lname = null, int page = 1, int perPage = 100)
         {
-            return View(await _context.Defendants.ToListAsync());
+            var defendants = _context.Defendants.Include(x => x.PriorResidences).Include(x => x.Accounts).AsQueryable();
+
+            if(search != null)
+            {
+                defendants = defendants.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.Address1.Contains(search) || x.Address2.Contains(search) || x.City.Contains(search) || x.State.Contains(search) || x.ZipCode.Contains(search) || x.PriorResidences.Any(y => y.Address.Contains(search) || y.Address2.Contains(search) || y.City.Contains(search) || y.State.Contains(search) || y.ZipCode.Contains(search)) || x.Accounts.Any(y => y.Docket.Contains(search)));
+            }
+
+            if(fName != null)
+            {
+                defendants = defendants.Where(x => x.FirstName.Contains(fName));
+            }
+
+            if(lname != null)
+            {
+                defendants = defendants.Where(x => x.LastName.Contains(lname));
+            }
+
+            ViewBag.PerPage = perPage;
+            ViewBag.Search = search;
+            ViewBag.FName = fName;
+            ViewBag.LName = lname;
+            return View(new Pagination<Defendant>(await defendants.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), await defendants.CountAsync(), page, perPage));
         }
 
         // GET: Defendants/Details/5

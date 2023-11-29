@@ -1,10 +1,14 @@
 using CCRestitution;
 using CCRestitution.Data;
 using CCRestitution.Models;
+using CCRestitution.ReportsRepository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 using System.Text.Json.Serialization;
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +35,6 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Developer", policy => policy.RequireClaim("UserRole", UserRole.Developer.ToString()));
     options.FallbackPolicy = options.DefaultPolicy;
 });
-
 
 
 

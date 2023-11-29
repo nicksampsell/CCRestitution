@@ -27,6 +27,19 @@
         </div>
 
         <div class="row">
+                <div class="col-3">
+                    <label for="TotalAmount" class="control-label">Paid By</label>
+                </div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <label asp-for="AccountId" class="control-label"></label>
+                        <select asp-for="AccountId" class="form-control"></select>
+                        <span asp-validation-for="AccountId" class="text-danger"></span>
+                    </div>
+                </div>
+        </div>
+
+        <div class="row">
             <div class="col-3">
                   <label for="TotalAmount" class="control-label">Total Amount</label>
             </div>
@@ -143,10 +156,11 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script type="text/javascript" src="~/lib/money.js/money.min.js"></script>
+    <script type="text/javascript" src="~/lib/dinero.js/dinero.min.js"></script>
     
 
     <script type="text/javascript">
@@ -212,6 +226,8 @@
             }
             return sel.text;
         }
+
+        Dinero();
         
 
 
@@ -223,53 +239,84 @@
         var ehm = document.getElementById('EHMAmount');
         var otherAmountField = document.getElementById('OtherAmount');
         var supervision = document.getElementById('SupervisionFee');
+        var fineField = document.getElementById('FineAmount');
 
 
-        var totalAmount = 0;
-        var surchargeAmount = 0;
-        var restitutionAmount = 0;
-        var mandatoryAmount = 0;
-        var ehmAmount = 0;
-        var otherAmount = 0;
-        var supervisionAmount = 0;
+        var totalAmount = Dinero({ amount: 0, currency: 'USD'});
+        var surchargeAmount = Dinero({ amount: 0, currency: 'USD'});
+        var restitutionAmount = Dinero({ amount: 0, currency: 'USD'});
+        var mandatoryAmount = Dinero({ amount: 0, currency: 'USD'});
+        var ehmAmount = Dinero({ amount: 0, currency: 'USD'});
+        var otherAmount = Dinero({ amount: 0, currency: 'USD'});
+        var supervisionAmount = Dinero({ amount: 0, currency: 'USD'});
+        var fineAmount = Dinero({ amount: 0, currency: 'USD' });
 
 
-        supervision.addEventListener('keyUp', e => {
-            supervisionAmount = e.target.value;
+        fineField.addEventListener('keyup', e => {
+            fineAmount = Dinero({
+                amount: !!e.target.value ? parseFloat(e.target.value) * 100 : 0,
+                currency: 'USD'
+            })
+            shiftFunds();
+        })
+
+        supervision.addEventListener('keyup', e => {
+            supervisionAmount = Dinero({
+                amount: !!e.target.value ? parseFloat(e.target.value) * 100 : 0,
+                currency: 'USD'
+            })
             shiftFunds();
         })
 
         otherAmountField.addEventListener('keyup', e => {
-            otherAmount = e.target.value;
+            otherAmount = Dinero({
+                amount: !!e.target.value ? parseFloat(e.target.value) * 100 : 0,
+                currency: 'USD'
+            });
             shiftFunds();
         })
 
         ehm.addEventListener('keyup', e => {
-            ehmAmount = e.target.value;
+                ehmAmount = Dinero({
+                amount: !!e.target.value ? parseFloat(e.target.value) * 100 : 0,
+                    currency: 'USD'
+                });
             shiftFunds();
         })
 
         mandatory.addEventListener('keyup', e => {
-            mandatoryAmount = e.target.value;
+            
+                mandatoryAmount = Dinero({
+                    amount: !!e.target.value ? parseFloat(e.target.value) * 100 : 0,
+                    currency: 'USD'
+                });
             shiftFunds();
         })
 
         function shiftFunds() { 
-            restitutionAmount = totalAmount - surchargeAmount - mandatoryAmount - ehmAmount - otherAmount - supervisionAmount;
-            restitution.value = restitutionAmount;
+            restitutionAmount = totalAmount.subtract(fineAmount).subtract(surchargeAmount).subtract(mandatoryAmount).subtract(ehmAmount).subtract(otherAmount).subtract(supervisionAmount);
+            restitution.value = restitutionAmount.toFormat('0,0.00');
         }
 
 
-        totalField.addEventListener('keyup', function (event) {
+        totalField.addEventListener('keyup', function (e) {
             if(!initial)
             {
 
-                totalAmount = event.target.value;
-                surchargeAmount = totalAmount * .05;
-                restitutionAmount = totalAmount - surchargeAmount;
+                totalAmount = Dinero({
+                    amount: parseFloat(e.target.value) * 100,
+                    currency: 'USD'
+                });
 
-                surcharge.value = surchargeAmount;
-                restitution.value = restitutionAmount;
+                console.log(totalAmount.getAmount())
+                surchargeAmount = totalAmount.percentage(5);
+                restitutionAmount = totalAmount.subtract(surchargeAmount);
+
+                console.log(surchargeAmount)
+                console.log(restitutionAmount)
+
+                surcharge.value = surchargeAmount.toFormat('0,0.00');
+                restitution.value = restitutionAmount.toFormat('0,0.00');
 
 
 
