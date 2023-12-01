@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCRestitution.Data;
 using CCRestitution.Models;
+using Pagination.EntityFrameworkCore.Extensions;
 
 namespace CCRestitution.Controllers
 {
@@ -20,9 +21,19 @@ namespace CCRestitution.Controllers
         }
 
         // GET: Attorneys
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 100)
         {
-            return View(await _context.Attorneys.ToListAsync());
+            var attorneys = _context.Attorneys.AsQueryable();
+
+            if(!String.IsNullOrEmpty(search))
+            {
+                attorneys = attorneys.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.Address.Contains(search) || x.Address2.Contains(search) || x.City.Contains(search) || x.Phone.Contains(search) || x.Fax.Contains(search));
+            }
+
+            ViewBag.Search = search;
+            ViewBag.PerPage = perPage;
+
+            return View(new Pagination<Attorney>(await attorneys.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), await attorneys.CountAsync(), page, perPage));
         }
 
         // GET: Attorneys/Details/5

@@ -19,6 +19,9 @@ namespace CCRestitution.Models
         public string? Address2 { get; set; }
         public string? City { get; set; }
 
+        public string? Phone { get; set; }
+        public string? CellPhone { get; set; }
+
         public string? State { get; set; }
         [Display(Name = "Zip Code")]
         public string? ZipCode { get; set; }
@@ -30,6 +33,25 @@ namespace CCRestitution.Models
         public string? Notes { get; set; }
         public List<VictimPriorResidence> PriorResidences { get; set; } = new List<VictimPriorResidence>();
         public List<Account> Accounts { get; set; } = new List<Account>();
+
+        public string FullName
+        {
+            get
+            {
+
+                string _name;
+                if (MiddleName != null)
+                {
+                    _name = $"{FirstName} {MiddleName} {LastName}";
+                }
+                else
+                {
+                    _name = $"{FirstName} {LastName}";
+                }
+
+                return _name;
+            }
+        }
 
     }
 }

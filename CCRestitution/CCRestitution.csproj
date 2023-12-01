@@ -25,9 +25,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
     <PackageReference Include="Pagination.EntityFrameworkCore.Extensions" Version="2.5.1" />
     <PackageReference Include="QuestPDF" Version="2023.10.2" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientArea\React\" />
     <Folder Include="wwwroot\lib\select2\dist\" />
   </ItemGroup>
 

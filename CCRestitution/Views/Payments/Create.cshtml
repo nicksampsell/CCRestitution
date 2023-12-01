@@ -6,7 +6,7 @@
 }
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row mb-5">
@@ -26,6 +26,8 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-8">
         <div class="row mb-3">
                 <div class="col-3">
                     <label for="PaymentBy" class="control-label">Paid By</label>
@@ -164,15 +166,67 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Account Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Amount Remaining</th>
+                                    <th>Original Amount</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th>Fine Amount:</th>
+                                    <td id="DisplayFineBalance">$0.00</td>
+                                    <td id="DisplayFineAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                                <th class="">Mandatory Surcharge:</th>
+                                <td id="DisplayMandatoryBalance">$0.00</td>
+                                <td id="DisplayMandatoryAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                                <th class="">EHM:</th>
+                                <td id="DisplayEHMBalance">$0.00</td>
+                                <td id="DisplayEHMAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                                <th class="">Restitution:</th>
+                                <td id="DisplayRestitutionBalance">$0.00</td>
+                                <td id="DisplayRestitutionAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                            <th class="">5% Surcharge:</th>
+                                <td id="DisplaySurchargeBalance">$0.00</td>
+                                <td id="DisplaySurchargeAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                            <th class="">Other/Misc:</th>
+                                <td id="DisplayMiscBalance">$0.00</td>
+                                <td id="DisplayMiscAmount">$0.00</td>
+                            </tr>
+                            <tr>
+                                <th class="">Supv. Fee:</th>
+                                <td id="DisplaySupvFeeBalance">$0.00</td>
+                                 <td id="DisplaySupvFeeAmount">$0.00</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group text-end">
+                    <input type="submit" value="Submit Payment" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 
@@ -231,6 +285,14 @@
                         text: item.fullName
                     }));
                 });
+
+                $('#DisplayFineAmount').text(data?.moneyOrdered[0]?.fineAmount);
+                $('#DisplayMandatoryAmount').text(data?.moneyOrdered[0]?.mandatoryAmount);
+                $('#DisplayEHMAmount').text(data?.moneyOrdered[0]?.fineAmount);
+                $('#DisplayRestitutionAmount').text(data?.moneyOrdered[0]?.restitutionAmount);
+                $('#DisplaySurchargeAmount').text(data?.moneyOrdered[0]?.surchargeAmount);
+                $('#DisplayMiscAmount').text(data?.moneyOrdered[0]?.miscAmount);
+                $('#DisplaySupvFeeAmount').text(data?.moneyOrdered[0]?.cvafAmount);
 
 
             });

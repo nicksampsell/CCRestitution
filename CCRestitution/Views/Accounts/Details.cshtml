@@ -2,9 +2,153 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "SubLayouts/_Viewer";
 }
 
-<h1>Details</h1>
+<h2>Case Information</h2>
+
+<h3>Defendants</h3>
+@if(Model.Defendants.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Numbers</th>
+            <th></th>
+        </tr>
+    @foreach(var defendant in Model.Defendants)
+    {
+     <tr>
+         <td>@defendant.FullName</td>
+            <td>
+                @if (!String.IsNullOrEmpty(defendant.Address1))
+                {
+                    @defendant.Address1
+
+                    <br />
+                }
+                @if (!String.IsNullOrEmpty(defendant.Address2))
+                {
+                    @defendant.Address2
+
+                    <br />
+                }
+                @((defendant.City != null) ? $"{defendant.City}," : "") @defendant.State @defendant.ZipCode
+            </td>
+            <td>
+                    @if (!string.IsNullOrEmpty(defendant.Phone))
+                    {
+                        @defendant.Phone
+
+                        <br />
+                    }
+                @if(!string.IsNullOrEmpty(defendant.CellPhone))
+                {
+                    @defendant.CellPhone<br />
+                }
+
+                @if (!String.IsNullOrEmpty(defendant.AltPhone))
+                {
+                    @defendant.AltPhone @($"({defendant.PhoneOtherName}")
+                }
+                </td>
+                <td class="text-end">
+                    <a asp-controller="Defendant" asp-action="Edit" asp-route-id="@defendant.DefendantId" class="btn btn-sm btn-primary">Edit</a>
+                </td>
+     </tr>   
+    }
+    </table>
+}
+
+<h3>Victims</h3>
+@if (Model.Victims.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Numbers</th>
+            <th></th>
+        </tr>
+        @foreach (var victim in Model.Victims)
+        {
+            <tr>
+                <td>@victim.FullName</td>
+                <td>
+                    @if (!String.IsNullOrEmpty(victim.Address))
+                    {
+                        @victim.Address
+
+                        <br />
+                    }
+                    @if (!String.IsNullOrEmpty(victim.Address2))
+                    {
+                        @victim.Address2
+
+                        <br />
+                    }
+                    @((victim.City != null) ? $"{victim.City}," : "") @victim.State @victim.ZipCode
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(victim.Phone))
+                    {
+                        @victim.Phone
+
+                        <br />
+                    }
+                    @if (!string.IsNullOrEmpty(victim.CellPhone))
+                    {
+                        @victim.CellPhone
+
+                        <br />
+                    }
+                </td>
+                <td class="text-end">
+                    <a asp-controller="Victim" asp-action="Edit" asp-route-id="@victim.VictimId" class="btn btn-sm btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h3>Payment History</h3>
+@if (Model.Payments.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Paid By</th>
+            <th>Date</th>
+            <th>Fine</th>
+            <th>Mandatory Surcharge</th>
+            <th>EHM</th>
+            <th>Restitution</th>
+            <th>Surcharge</th>
+            <th>Other/Misc</th>
+            <th>Supv. Fee</th>
+            <th></th>
+        </tr>
+
+        @foreach(var item in Model.Payments)
+        {
+            <tr>
+                <td>@item.Defendant.FullName</td>
+                <td>@(item.DatePaid.HasValue ? item.DatePaid.Value.ToString("d") : "")</td>
+                <td>@($"{item.FineAmount:$#,##0.00}")</td>
+                <td>@($"{item.MandatorySurchargeAmount:$#,##0.00}")</td>
+                <td>@($"{item.EHMAmount:$#,##0.00}")</td>
+                <td>@($"{item.RestitutionAmount:$#,##0.00}")</td>
+                <td>@($"{item.SurchargeAmount:$#,##0.00}")</td>
+                <td>@($"{item.OtherAmount:$#,##0.00}")</td>
+                <td>@($"{item.SupervisionFee:$#,##0.00}")</td>
+                <td class="text-end">
+                    <a asp-controller="Payment" asp-action="Details" asp-route-id="@item.PaymentId" class="btn btn-primary btn-sm">Print Receipt</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
 
 <div>
     <h4>Account</h4>

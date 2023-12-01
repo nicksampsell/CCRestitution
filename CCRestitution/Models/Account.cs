@@ -29,5 +29,7 @@ namespace CCRestitution.Models
         public int? JudgeId { get; set; }
         public Judge? Judge { get; set; }
 
+        public List<MoneyOrdered>? MoneyOrdered { get; set; }
+        public List<Payment>? Payments { get; set; }
     }
 }

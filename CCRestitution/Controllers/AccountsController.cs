@@ -23,7 +23,7 @@ namespace CCRestitution.Controllers
         // GET: Accounts
         public async Task<IActionResult> Index(string search = "", string? docket = null, string? fname = null, string? lname = null, int page = 1, int perPage = 100)
         {
-            var query = _context.Accounts.AsSplitQuery().Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).Include(x => x.Victims.OrderBy(x => x.AmountDue)).AsQueryable();
+            var query = _context.Accounts.AsSplitQuery().Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).Include(x => x.Victims.OrderBy(x => x.AmountDue)).Include(x => x.MoneyOrdered).AsQueryable();
 
             if (search != null)
             {
@@ -33,7 +33,7 @@ namespace CCRestitution.Controllers
 
             if (docket != null)
             {
-                query = query.Where(x => x.Docket.Contains(docket));
+                query = query.Where(x => x.Docket.Contains(docket) || x.CaseNumber.ToString().Contains(search));
             }
 
             if (fname != null)
@@ -64,8 +64,7 @@ namespace CCRestitution.Controllers
             }
 
             var account = await _context.Accounts
-                .Include(a => a.Court)
-                .Include(a => a.Judge)
+                .AsSplitQuery().Include(a => a.Court).Include(a => a.Judge).Include(x => x.Defendants).Include(x => x.Victims.OrderBy(x => x.AmountDue)).Include(x => x.MoneyOrdered).Include(x => x.Payments).ThenInclude(x => x.Defendant)
                 .FirstOrDefaultAsync(m => m.AccountId == id);
             if (account == null)
             {

@@ -14,6 +14,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>Title</th>
             <th>
                 Section
             </th>
@@ -28,6 +29,9 @@
     <tbody>
 @foreach (var item in Model.Results) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Section)
             </td>

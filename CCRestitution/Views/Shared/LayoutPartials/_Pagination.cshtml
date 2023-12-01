@@ -22,7 +22,7 @@
                 for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li class="page-item">
-                        <a asp-route-page="@i" asp-route-perPage="@ViewBag.PerPage" asp-route-search="@ViewBag.Search" class="page-link">@i</a>
+                        <a asp-route-page="@i" asp-route-perPage="@ViewBag.PerPage" asp-route-search="@ViewBag.Search" class="page-link @((i == Model.CurrentPage) ? "active" : "")">@i</a>
                     </li>
                 }
             }

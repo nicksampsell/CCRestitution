@@ -1,63 +1,112 @@
 ﻿@model CCRestitution.Models.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create User";
+    Layout = "SubLayouts/_Editor";
 }
 
-<h1>Create</h1>
-
-<h4>User</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Identity" class="control-label"></label>
-                <input asp-for="Identity" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="Identity" class="control-label">Network UserID</label>
+                <select asp-for="Identity" class="form-control"></select>
+                <div id="IdentityHelp" class="form-text mt-0 pt-0 mb-3"><small>(Start typing the person's name or network username and a list will appear.)</small></div>
                 <span asp-validation-for="Identity" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="LastName" class="control-label"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Role" class="control-label"></label>
-                <select asp-for="Role" class="form-control"></select>
+                <select asp-for="Role" class="form-select" asp-items="@Html.GetEnumSelectList<UserRole>()"></select>
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
-                <span asp-validation-for="Created" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Updated" class="control-label"></label>
-                <input asp-for="Updated" class="form-control" />
-                <span asp-validation-for="Updated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create User" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Identity').select2({
+                ajax: {
+                    selectionCssClass: "select2--small",
+                    dropdownCssClass: "select2--small",
+                    url: '/Users/AD/Filter',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var query = {
+                            search: params.term
+                        }
+
+                        return query;
+                    },
+                    processResults: function (data) {
+                        data.results = $.map(data.results, function (res) {
+                            res.id = res.loginName.replace('\\\\', '\\');
+                            res.text = res.firstName + ' ' + res.lastName;
+                            return res;
+                        });
+                        return {
+                            results: data.results
+                        };
+                    },
+                },
+                placeholder: "Search for a user (by first or last name)",
+                minimumInputLength: 2,
+                templateSelection: formatSelection,
+                templateResult: formatResult,
+                theme: "bootstrap-5"
+            }).on('select2:select', function (e) {
+                var data = e.params.data;
+
+                $('#FirstName').val(data.firstName);
+                $('#LastName').val(data.lastName);
+                $('#Email').val(data.email);
+            });
+        });
+
+        function formatSelection(sel = null) {
+            if (sel == null || sel == undefined || sel == "" ||
+                sel.username == undefined) {
+                return 'Search for a user (by first or last name)';
+            }
+
+            if (sel.loading) {
+                return sel.text;
+            }
+
+            console.log(sel);
+            return sel.firstName + ' ' + sel.lastName + ' (' + sel.username + ')';
+        }
+
+        function formatResult(sel) {
+
+            if (sel.loading) {
+                return sel.text;
+            }
+            return sel.firstName + ' ' + sel.lastName + ' (' + sel.username + ')';
+        }
+    </script>
 }

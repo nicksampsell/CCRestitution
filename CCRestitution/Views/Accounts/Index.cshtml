@@ -1,7 +1,7 @@
 ﻿@model Pagination<CCRestitution.Models.Account>
 
 @{
-    ViewData["Title"] = "Manage Cases";
+    ViewData["Title"] = "Manage Accounts";
     Layout = "SubLayouts/_Index";
 }
 
@@ -10,7 +10,7 @@
 
     <div class="form-floating mb-3 flex-grow-1 me-1">
         <input type="text" class="form-control" id="docket" name="docket" value="@ViewBag.Docket" placeholder="Docket #">
-        <label for="docket">Docket #</label>
+        <label for="docket">Account or Docket #</label>
     </div>
     <div class="form-floating mb-3 flex-grow-1 me-1">
         <input type="text" class="form-control" id="fname" name="fname" value="@ViewBag.FName" placeholder="First Name">
@@ -28,19 +28,13 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Case Number</th>
+            <th>Account Number</th>
             <th>Docket Number</th>
-            <th>Type</th>
-            <th>Assigned Date</th>
-            <th>Closed Date</th>
-            <th>Arrest Date</th>
-            <th>Agency Code</th>
-            <th>Custody Status</th>
-            <th>Court</th>
-            <th>Judge</th>
+            <th>Money Ordered</th>
             <th>Defendants</th>
             <th>Victims</th>
-            <th></th>
+            <th>Status</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -53,28 +47,66 @@
                 @Html.DisplayFor(modelItem => item.Docket)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @(item.AssignedDate.HasValue ? item.AssignedDate.Value.ToString("d") : "")
-            </td>
-            <td>
-                @(item.ClosedDate.HasValue ? item.ClosedDate.Value.ToString("d") : "")
-            </td>
-            <td>
-                @(item.ArrestDate.HasValue ? item.ArrestDate.Value.ToString("d") : "")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgencyCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustodyStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Court.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Judge.FullName)
+                @if (item.MoneyOrdered.Count > 0)
+                {
+                        @foreach (var MoneyOrdered in item.MoneyOrdered)
+                        {
+                            <dl>
+                        @if(MoneyOrdered.FineAmount != null && MoneyOrdered.FineAmount > 0)
+                        {
+                        <dt>Fine</dt>
+                        <dd>
+                            @String.Format($"{MoneyOrdered.FineAmountPaid:$#,##0.00}") of
+                            @String.Format($"{MoneyOrdered.FineAmount:,$#,##0.00}")
+                        </dd>
+                        }
+                        @if (MoneyOrdered.MandatoryAmount != null && MoneyOrdered.MandatoryAmount > 0)
+                        {
+                            <dt>Mandatory Surcharge</dt>
+                            <dd>
+                                @String.Format($"{MoneyOrdered.MandatoryAmountPaid:$#,##0.00}") of
+                                @String.Format($"{MoneyOrdered.MandatoryAmount:$#,##0.00}")
+                            </dd>
+                        }
+                        @if (MoneyOrdered.CVAFAmount != null && MoneyOrdered.CVAFAmount> 0)
+                        {
+                            <dt>CVAF</dt>
+                            <dd>
+                                @String.Format($"{MoneyOrdered.CVAFAmountPaid:$#,##0.00}") of
+                                @String.Format($"{MoneyOrdered.CVAFAmount:$#,##0.00}")
+                            </dd>
+                        }
+                        @if (MoneyOrdered.RestitutionAmount != null && MoneyOrdered.RestitutionAmount > 0)
+                        {
+                            <dt>Restitution</dt>
+                            <dd>
+                                @String.Format($"{MoneyOrdered.RestitutionAmountPaid:$#,##0.00}") of
+                                @String.Format($"{MoneyOrdered.RestitutionAmount:$#,##0.00}")
+                            </dd>
+                        }
+                        @if (MoneyOrdered.SurchargeAmount != null && MoneyOrdered.SurchargeAmount > 0)
+                        {
+                            <dt>5% Surcharge</dt>
+                            <dd>
+                                @String.Format($"{MoneyOrdered.SurchargeAmountPaid:$#,##0.00}") of
+                                @String.Format($"{MoneyOrdered.SurchargeAmount:$#,##0.00}")
+                            </dd>
+                        }
+                        @if (MoneyOrdered.MiscAmount != null && MoneyOrdered.MiscAmount> 0)
+                        {
+                            <dt>Other/Misc</dt>
+                            <dd>
+                                @String.Format($"{MoneyOrdered.MiscAmountPaid:$#,##0.00}") of
+                                @String.Format($"{MoneyOrdered.MiscAmount:$#,##0.00}")
+                            </dd>
+                        }
+                        <dt>Supv. Fee</dt>
+                        <dd>@String.Format($"{MoneyOrdered.DWIAmount:$#,##0.00}")</dd>
+                                
+                    
+                    </dl>
+                    }
+                }
             </td>
             <td>
                 @if(item.Defendants.Count > 0)
@@ -99,9 +131,12 @@
                 }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AccountId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AccountId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AccountId">Delete</a>
+                @((item.ClosedDate == null) ? "Active" : "Closed")
+            </td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.AccountId">Edit</a>
+                <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.AccountId">Details</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.AccountId">Delete</a>
             </td>
         </tr>
 }

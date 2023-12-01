@@ -25,22 +25,23 @@ namespace CCRestitution.Controllers
         public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 200)
         {
             var crimes = _context.Crimes.AsQueryable();
-            var totalCrimes = await _context.Crimes.CountAsync();
+
 
             if (search != null)
             {
 
                 crimes = crimes.Where(x => x.Section.Contains(search) || x.Sub_Section13.Contains(search) || x.Sub_Section.Contains(search) || x.Section13.Contains(search) || x.Full_Law_Description.Contains(search) || x.Law_Description.Contains(search) || x.Law_Ordinal.Contains(search) || x.Maxi_Law_Description.Contains(search) || x.Mini_Law_Description.Contains(search));
 
-                totalCrimes = await _context.Crimes.Where(x => x.Section.Contains(search) || x.Sub_Section13.Contains(search) || x.Sub_Section.Contains(search) || x.Section13.Contains(search) || x.Full_Law_Description.Contains(search) || x.Law_Description.Contains(search) || x.Law_Ordinal.Contains(search) || x.Maxi_Law_Description.Contains(search) || x.Mini_Law_Description.Contains(search)).CountAsync();
             }
 
            
             ViewBag.PerPage = perPage;
             ViewBag.Search = search;
 
+            crimes = crimes.OrderBy(x => x.Title).ThenBy(x => x.Section13).ThenBy(x => x.Sub_Section13);
 
-            return View(new Pagination<Crime>(await crimes.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), totalCrimes, page, perPage));
+            
+            return View(new Pagination<Crime>(await crimes.Skip((page - 1) * perPage).Take(perPage).ToListAsync(), await crimes.CountAsync(), page, perPage));
         }
 
         // GET: Crimes/Details/5
