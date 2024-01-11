@@ -22,7 +22,7 @@ namespace CCRestitution.Area.Payments.Controllers
         }
 
         // GET: Payments
-        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 100, string sortBy = "id", string order = "asc")
+        public async Task<IActionResult> Index(string search = "", int page = 1, int perPage = 100, string sortBy = "id", string order = "desc")
         {
             var query = _context.Payments.Include(x => x.Account).Include(x => x.User).AsQueryable();
             bool orderByDescending = order.ToLower() == "desc" ? true : false;
@@ -67,8 +67,9 @@ namespace CCRestitution.Area.Payments.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentId,UserId,AccountNumber,DatePaid,FineAmount,MandatorySurchargeAmount,EHMAmount,RestitutionAmount,SurchargeAmount,OtherAmount,SupervisionFee,Notes,Created,Updated")] Payment payment)
+        public async Task<IActionResult> Create([Bind("PaymentId,UserId,AccountId, DefendantId,DatePaid,FineAmount,MandatorySurchargeAmount,EHMAmount,RestitutionAmount,SurchargeAmount,OtherAmount,SupervisionFee,Notes,PaymentMethod,TotalAmount,Created,Updated")] Payment payment)
         {
+            payment.UserId = int.Parse(User.FindFirst("UserId").Value ?? "");
             if (ModelState.IsValid)
             {
                 _context.Add(payment);
@@ -99,7 +100,7 @@ namespace CCRestitution.Area.Payments.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,UserId,AccountNumber,DatePaid,FineAmount,MandatorySurchargeAmount,EHMAmount,RestitutionAmount,SurchargeAmount,OtherAmount,SupervisionFee,Notes,Created,Updated")] Payment payment)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,UserId,AccountId, DefendantId,DatePaid,FineAmount,MandatorySurchargeAmount,EHMAmount,RestitutionAmount,SurchargeAmount,OtherAmount,SupervisionFee,Notes,PaymentMethod,TotalAmount,Updated")] Payment payment)
         {
             if (id != payment.PaymentId)
             {

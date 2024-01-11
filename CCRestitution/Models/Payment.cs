@@ -31,5 +31,15 @@ namespace CCRestitution.Models
         [Display(Name = "Amount Towards Supervision Fee")]
         public decimal? SupervisionFee { get; set; }
         public string? Notes { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
+
+        public decimal? TotalAmount { get; set; }
+    }
+
+    public enum PaymentMethod
+    {
+        Cash = 0,
+        CreditCard = 1,
+        Check = 2
     }
 }

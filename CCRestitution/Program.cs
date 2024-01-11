@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using QuestPDF.Infrastructure;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+using CCRestitution.Interfaces;
+using CCRestitution.Services;
 
 QuestPDF.Settings.License = LicenseType.Community;
 
@@ -35,6 +37,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext") ?? throw new InvalidOperationException("Connection string not found")));
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+
+builder.Services.AddScoped<IMoneyService, MoneyService>();
 
 builder.Services.AddAuthorization(options =>
 {

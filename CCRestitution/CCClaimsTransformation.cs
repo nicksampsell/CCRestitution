@@ -23,7 +23,7 @@ namespace CCRestitution
                 var ci = (ClaimsIdentity)principal.Identity;
 
                 List<Claim> claims = new List<Claim>();
-                claims.Add(new Claim("UserId", user.Identity.ToString()));
+                claims.Add(new Claim("UserId", user.UserId.ToString()));
                 claims.Add(new Claim("FirstName", user.FirstName));
                 claims.Add(new Claim("LastName", user.LastName));
                 claims.Add(new Claim("FullName", $"{user.FirstName} {user.LastName}"));

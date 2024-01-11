@@ -56,6 +56,7 @@ namespace CCRestitution.Models
         public decimal? CVAFAmount { get; set; }
         public decimal? CVAFAmountPaid { get; set; }
         public decimal? CVAFBalance { get; set; }
+        public DateTime? CVAFLastPayDate { get; set; }
         public string? Judgement { get; set; }
         public string? Notes { get; set; }
         public string? Group { get; set; }
