@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, "AllUsers")).Succeeded)
+{
+    <div class="dropdown me-5">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Administration
+        </a>
+    <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"ArrestingAgencies")" asp-area="Admin" asp-controller="ArrestingAgencies" asp-action="Index">Manage Arresting Agencies</a>
+            </li>
+
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"Attorneys")" asp-area="Admin" asp-controller="Attorneys" asp-action="Index">Manage Attorneys</a>
+            </li>
+
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"Courts")" asp-area="Admin" asp-controller="Courts" asp-action="Index">
+                    Manage Courts
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"DetentionFacilities")" asp-area="Admin" asp-controller="DetentionFacilities" asp-action="Index">Manage Detention Facilities</a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"Judges")" asp-area="Admin" asp-controller="Judges" asp-action="Index">
+                    Manage Judges
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"Crimes")" asp-area="Admin" asp-controller="Crimes" asp-action="Index">
+                    Manage Laws/Crimes
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"ProbationDepartments")" asp-area="Admin" asp-controller="ProbationDepartments" asp-action="Index">Manage Probation Departments</a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"ProbationOfficers")" asp-area="Admin" asp-controller="ProbationOfficers" asp-action="Index">Manage Probation Officers</a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"TreatmentAgencies")" asp-area="Admin" asp-controller="TreatmentAgencies" asp-action="Index">Manage Treatment Agencies</a>
+            </li>
+            <li>
+                <a class="dropdown-item @Html.ActiveClass(controller:"Users")" asp-area="Admin" asp-controller="Users" asp-action="Index">
+                    Manage Users
+                </a>
+            </li>
+
+    </ul>
+    </div>
+}

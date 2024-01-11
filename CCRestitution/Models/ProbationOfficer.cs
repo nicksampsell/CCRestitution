@@ -20,5 +20,7 @@ namespace CCRestitution.Models
         public int? ProbationDepartmentId { get; set; }
         public ProbationDepartment? ProbationDepartment { get; set; }
 
+        public string FullName => $"{FirstName} {MiddleName} {LastName}";
+
     }
 }

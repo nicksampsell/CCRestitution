@@ -1,0 +1,164 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "_Layout";
+}
+
+<header class="d-flex flex-row justify-content-between align-items-center  mb-3">
+    <div class="grow">
+        <a asp-action="Index" style="color: rgb(33, 37, 41); text-decoration: none"><h1 class="display-4">@ViewData["Title"]</h1></a>
+    </div>
+</header>
+<ul class="nav nav-tabs mb-3" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" href="#" id="check-tab" data-bs-toggle="tab" data-bs-target="#checkPane">Check Processing</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" aria-current="page" id="money-reports-tab" data-bs-toggle="tab" data-bs-target="#moneyReportsPane">Money Reports</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#" aria-current="page" id="monthly-reports-tab" data-bs-toggle="tab" data-bs-target="#monthlyReportsPane">County Reports</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="reportTabs">
+    <div class="tab-pane fade show active" id="checkPane">
+        <h1>Money Reports</h1>
+        <a href="#" class="btn btn-primary m-1">Log Disch/Trans MO</a>
+        <a href="#" class="btn btn-primary m-1">Log Money Ordered</a>
+        <a href="#" class="btn btn-primary m-1">Monthly Change Log - Case Assignments MO</a>
+        <a href="#" class="btn btn-primary m-1">Find MO Receipt #</a>
+        <a href="#" class="btn btn-primary m-1">Find MO Receipt by Date</a>
+        <a href="#" class="btn btn-primary m-1">Find MO Paid Check #</a>
+        <a href="#" class="btn btn-primary m-1">Find Supv Fee Receipt #</a>
+        <a href="#" class="btn btn-primary m-1">Find Supv Fee Receipt By Date</a>
+        <a href="#" class="btn btn-primary m-1">Supv Fee YTD Status</a>
+        <a href="#" class="btn btn-primary m-1">Supv Fee YTD Status Detail</a>
+        <a href="#" class="btn btn-primary m-1">Supv Fee - No</a>
+        <a href="#" class="btn btn-primary m-1">Check Recon</a>
+        <a href="#" class="btn btn-primary m-1">Check Recon By Dates</a>
+        <a href="#" class="btn btn-primary m-1">Delete Check Recon</a>
+        <a href="#" class="btn btn-primary m-1">Cross Foot Total</a>
+        <a href="#" class="btn btn-primary m-1">Verify Amoutns Paid</a>
+        <a href="#" class="btn btn-primary m-1">Verify Amounts Diff</a>
+
+        <div class="border">
+            <label>PO</label>
+            <select></select>
+            <a href="#">MO PO Collect</a>
+            <a href="#">MO Cond Dischg</a>
+        </div>
+
+        <a href="#">Aud Rpt - Victim Checks in date range</a>
+        <a href="#">Aud Rpt - Received and Distributed Range</a>
+    </div>
+    <div class="tab-pane fade" id="moneyReportsPane">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Monthly Reports</h2>
+                    </div>
+                    <ul class="list-group list-group-flush">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="monthlyReportsPane">
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Monthly Reports</h2>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">Partial Payment Letter</a></li>
+                        <li class="list-group-item"><a href="#">Final Restitution Payment Letter</a></li>
+                        <li class="list-group-item"><a href="#">Overpayment Letter</a></li>
+                        <li class="list-group-item"><a href="#">DA Notification - Paid in Full Letter</a></li>
+                        <li class="list-group-item"><a href="#">Court Notification - Paid in Full Letter</a></li>
+                        <li class="list-group-item"><a href="#">Court Collections - Restiution Justification</a></li>
+                        <li class="list-group-item"><a href="#">Court Collections - Surcharge Justification</a></li>
+                        <li class="list-group-item"><a href="#"># of Accounts Per Court (listing RS#) - Justification</a></li>
+                        <li class="list-group-item"><a href="#">Restitution Cases Opened By Crime (Listing Names) Justification</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Monthly Reports</h2><h3 class="h4 mt-0 pt-0">(After Printing Checks)</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">Restitution Cases Opened for Month/Year</a></li>
+                        <li class="list-group-item"><a href="#">Restitution Cases Closed for Month/Year</a></li>
+                        <li class="list-group-item"><a href="#">Restitution Opened by Crime</a></li>
+                        <li class="list-group-item"><a href="#">Restitution Closed by Crime</a></li>
+                        <li class="list-group-item"><a href="#">PO Restitution List</a></li>
+                        <li class="list-group-item"><a href="#">Monthly DSS Report</a></li>
+                        <li class="list-group-item"><a href="#">EM Monthly Fees Collected</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <h2 class="card-title mb-0">Elaine's DPCA 30-A</h2><h3 class="h4 mt-0 pt-0">(By Crime)</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item"><a href="#">Elaine's DPCA-30-A</a></li>
+                        <li class="list-group-item"><a href="#">Cases Closed By Crime Crosstab</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Elaine's Reports</h2><h3 class="h4 mt-0 pt-0">(By Court)</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">Collections (By Court)</a></li>
+                        <li class="list-group-item"><a href="#">Disbursements by Court)</a></li>
+                        <li class="list-group-item"><a href="#"># of Accounts Opened in Family Court</a></li>
+                        <li class="list-group-item"><a href="#"># of Accounts Closed in Family Court</a></li>
+                        <li class="list-group-item"><a href="#"># of Accounts Opened in Criminal Court</a></li>
+                        <li class="list-group-item"><a href="#"># of Accounts Closed in Crinimal Court</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Vicki's Reports</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">Vicki F Report</a></li>
+                        <li class="list-group-item"><a href="#">Vicki F - CCJ</a></li>
+                        <li class="list-group-item"><a href="#">Vicki F - DOCS</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

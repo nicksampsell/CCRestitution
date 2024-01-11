@@ -1,0 +1,149 @@
+﻿@{
+    string currentArea = ViewContext.RouteData.Values["area"]?.ToString() ?? "";
+}
+
+@if (currentArea.ToLower() == "admin" && (await AuthorizationService.AuthorizeAsync(User, "AllUsers")).Succeeded)
+{
+    <div class="d-flex flex-row text-center align-items-center">
+        <a asp-area="" asp-controller="" asp-action="Index" class="d-flex flex-row justify-content-between align-items-center text-decoration-none">
+            <img src="~/img/cclogo.png" alt="Chemung County Restitution System" class="col-4 img-fluid" />
+            <div class="d-flex flex-columns row">
+                <h1 class="h3 text-center text-white text-decoration-none flex-grow col-12">Restitution System</h1>
+                <h2 class="h5 text-center text-white text-decoration-none col-12">Admin Panel</h2>
+            </div>
+        </a>
+    </div>
+}
+else
+{
+    <div class="d-flex flex-column text-center align-items-center">
+        <a asp-area="" asp-controller="" asp-action="Index" class="">
+            <img src="~/img/cclogo.png" alt="Chemung County Restitution System" class="img-fluid logo" />
+        </a>
+        <h1 class="h3 text-centerte text-white text-decoration-none">Restitution System</h1>
+    </div>
+}
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "AllUsers")).Succeeded)
+{
+
+    <hr class="mt-3" />
+    <div class="welcome">
+        Current User: <strong>@User.FindFirst("FirstName").Value @User.FindFirst("LastName").Value</strong>
+    </div>
+    <hr />
+
+
+    @if (currentArea.ToLower() == "admin" && ((await AuthorizationService.AuthorizeAsync(User, "Supervisor")).Succeeded))
+    {
+
+        <ul class="nav nav-pills flex-column mb-auto">
+
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"ArrestingAgencies")" asp-area="Admin" asp-controller="ArrestingAgencies" asp-action="Index">Manage Arresting Agencies</a>
+            </li>
+
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Attorneys")" asp-area="Admin" asp-controller="Attorneys" asp-action="Index">Manage Attorneys</a>
+            </li>
+
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Courts")" asp-area="Admin" asp-controller="Courts" asp-action="Index">
+                    Manage Courts
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"DetentionFacilities")" asp-area="Admin" asp-controller="DetentionFacilities" asp-action="Index">Manage Detention Facilities</a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Judges")" asp-area="Admin" asp-controller="Judges" asp-action="Index">
+                    Manage Judges
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Crimes")" asp-area="Admin" asp-controller="Crimes" asp-action="Index">
+                    Manage Laws/Crimes
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"ProbationDepartments")" asp-area="Admin" asp-controller="ProbationDepartments" asp-action="Index">Manage Probation Departments</a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"ProbationOfficers")" asp-area="Admin" asp-controller="ProbationOfficers" asp-action="Index">Manage Probation Officers</a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"TreatmentAgencies")" asp-area="Admin" asp-controller="TreatmentAgencies" asp-action="Index">Manage Treatment Agencies</a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Users")" asp-area="Admin" asp-controller="Users" asp-action="Index">
+                    Manage Users
+                </a>
+            </li>
+
+        </ul>
+        <hr />
+
+        <div class="text-center w-100 flex-grow-1">
+            <a asp-area="" asp-controller="" asp-action="" class="btn btn-secondary has-icon btn-sm" style="width: auto;">
+
+                <span>Exit Configuration Area</span>
+            </a>
+        </div>
+
+
+    }
+    else
+    {
+
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Payments")" asp-area="Payments" asp-controller="Payments" asp-action="Index">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z" /></svg>
+                    Take Payment
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Reports")" aria-current="page" asp-area="Reports" asp-controller="Reports" asp-action="Index">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24"><path d="M640-640v-120H320v120h-80v-200h480v200h-80Zm-480 80h640-640Zm560 100q17 0 28.5-11.5T760-500q0-17-11.5-28.5T720-540q-17 0-28.5 11.5T680-500q0 17 11.5 28.5T720-460Zm-80 260v-160H320v160h320Zm80 80H240v-160H80v-240q0-51 35-85.5t85-34.5h560q51 0 85.5 34.5T880-520v240H720v160Zm80-240v-160q0-17-11.5-28.5T760-560H200q-17 0-28.5 11.5T160-520v160h80v-80h480v80h80Z" /></svg>
+                    Run Reports
+                </a>
+            </li>
+            <li class="nav-item"><hr /></li>
+
+
+
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Accounts")" asp-area="Accounts" asp-controller="Accounts" asp-action="Index">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640H447l-80-80H160v480l96-320h684L837-217q-8 26-29.5 41.5T760-160H160Zm84-80h516l72-240H316l-72 240Zm0 0 72-240-72 240Zm-84-400v-80 80Z" /></svg>
+                    Manage Cases/Accounts
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Defendants")" asp-area="Accounts" asp-controller="Defendants" asp-action="Index">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" /></svg>
+                    Manage Defendants
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link text-white @Html.ActiveClass(controller:"Victims")" asp-area="Accounts" asp-controller="Victims" asp-action="Index">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24"><path d="M343-470ZM80-120v-480l320-240 215 162q-25 3-47 11.5T526-644l-126-96-240 180v360h160v80H80Zm320 0v-76q0-21 10.5-39.5T439-265q46-27 96.5-41T640-320q54 0 104.5 14t96.5 41q18 11 28.5 29.5T880-196v76H400Zm86-80h308q-35-20-74-30t-80-10q-41 0-80 10t-74 30Zm154-160q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35Zm0-80q17 0 28.5-11.5T680-480q0-17-11.5-28.5T640-520q-17 0-28.5 11.5T600-480q0 17 11.5 28.5T640-440Zm0 240Z" /></svg>
+                    Manage Victims
+                </a>
+            </li>
+
+
+        </ul>
+
+    }
+
+
+
+}

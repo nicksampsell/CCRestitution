@@ -1,0 +1,60 @@
+﻿@model Pagination<CCRestitution.Models.TreatmentAgency>
+
+@{
+    ViewData["Title"] = "Treatment Agencies";
+    Layout = "SubLayouts/_Index";
+}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>Address</th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Fax
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Results) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.Address))
+                    {
+                        @item.Address
+
+                        <br />
+                    }
+                    @if (!String.IsNullOrEmpty(item.Address2))
+                    {
+                        @item.Address2
+
+                        <br />
+                    }
+                    @((item.City != null) ? $"{item.City}," : "") @item.State @item.ZipCode
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TreatmentAgencyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TreatmentAgencyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TreatmentAgencyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

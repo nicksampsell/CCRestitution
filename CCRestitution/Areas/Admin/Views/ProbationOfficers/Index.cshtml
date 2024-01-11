@@ -1,0 +1,49 @@
+﻿@model Pagination<CCRestitution.Models.ProbationOfficer>
+
+@{
+    ViewData["Title"] = "Probation Officers";
+    Layout = "SubLayouts/_Index";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Position
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Department
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Results) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProbationDepartment.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProbationOfficerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProbationOfficerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProbationOfficerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -4,8 +4,10 @@ using CCRestitution.Models;
 using CCRestitution.ReportsRepository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using QuestPDF.Infrastructure;
+using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 QuestPDF.Settings.License = LicenseType.Community;
@@ -13,11 +15,18 @@ QuestPDF.Settings.License = LicenseType.Community;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews().AddJsonOptions(options => {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 }).AddRazorOptions(options => {
     options.ViewLocationFormats.Add("/{0}.cshtml");
+    options.ViewLocationFormats.Add("/Views/{1}/Partials/{0}.cshtml");
     options.ViewLocationFormats.Add("/Views/Shared/LayoutPartials/{0}.cshtml");
+});
+
+builder.Services.Configure<RazorViewEngineOptions>(options =>
+{
+    options.AreaViewLocationFormats.Add("/Views/Shared/LayoutPartials/{0}.cshtml");
 });
 
 builder.Services.AddRazorPages();
@@ -57,6 +66,38 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapAreaControllerRoute(
+    name: "AccountsArea",
+    areaName: "Accounts",
+    pattern: "Accounts/{controller=Accounts}/{action=Index}/{id?}",
+    defaults: new { area = "Accounts" },
+    constraints: new { area = "Accounts" });
+
+app.MapAreaControllerRoute(
+    name: "AdminArea",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Departments}/{action=Index}/{id?}",
+    defaults: new { area = "Admin" },
+    constraints: new { area = "Admin" });
+
+app.MapAreaControllerRoute(
+    name: "PaymentArea",
+    areaName: "Payments",
+    pattern: "Payments/{controller=Payments}/{action=Index}/{id?}",
+    defaults: new { area = "Payments" },
+    constraints: new { area = "Payments" });
+
+app.MapAreaControllerRoute(
+    name: "ReportArea",
+    areaName: "Reports",
+    pattern: "Reports/{controller=Reports}/{action=Index}/{id?}",
+    defaults: new { area = "Reports" },
+    constraints: new { area = "Reports" });
+
+app.MapControllerRoute(
+    name: "defaultWithArea",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
