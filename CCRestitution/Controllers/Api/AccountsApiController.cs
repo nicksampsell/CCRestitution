@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using Pagination.EntityFrameworkCore.Extensions;
+using System.Collections.Generic;
 
 namespace CCRestitution.Controllers.Api
 {
@@ -19,9 +21,9 @@ namespace CCRestitution.Controllers.Api
         }
 
         [HttpGet("Search")]
-        public async Task<List<AccountSearchDTO>> Search(string search)
+        public async Task<PaginationResultset> Search(string search, int page = 1, int perPage = 100, bool nopage = false)
         {
-            return await _context.Accounts.Include(x => x.MoneyOrdered).Include(x => x.Payments).Include(x => x.Defendants).Where(x => x.Defendants.Any(y => y.FirstName.Contains(search) || y.LastName.Contains(search)) || x.Docket.Contains(search)).Select(x => new AccountSearchDTO
+            var results = _context.Accounts.Include(x => x.MoneyOrdered).Include(x => x.Payments).Include(x => x.Defendants).Where(x => x.Defendants.Any(y => y.FirstName.Contains(search) || y.LastName.Contains(search)) || x.Docket.Contains(search)).Select(x => new AccountSearchDTO
             {
                 AccountId = x.AccountId,
                 Docket = x.Docket,
@@ -48,7 +50,30 @@ namespace CCRestitution.Controllers.Api
                     EHMAnount = y.EHMAmount,
                     Created = y.Created
                 }).FirstOrDefault()
-            }).ToListAsync();
+            }).AsQueryable();
+
+            if (nopage)
+            {
+                return new PaginationResultset
+                {
+                    Results = await results.ToListAsync(),
+                    Options = await results.ToListAsync(),
+                    HasMore = false,
+                    Page = page,
+                    PerPage = await results.CountAsync(),
+                };
+            }
+            else
+            {
+                return new PaginationResultset
+                {
+                    Results = await results.Skip((page - 1) * perPage).Take(perPage).ToListAsync(),
+                    Options = await results.Skip((page - 1) * perPage).Take(perPage).ToListAsync(),
+                    HasMore = (await results.CountAsync() - (((page - 1) * perPage) + perPage) >= 0),
+                    Page = page,
+                    PerPage = perPage
+                };
+            }
         }
 
         [HttpGet("{id}/GetDefendants")]
@@ -110,5 +135,15 @@ namespace CCRestitution.Controllers.Api
         public decimal? EHMAnount { get; set; }
         public string? Notes { get; set; }
         public DateTime? Created { get; set; }
+    }
+
+    public class PaginationResultset
+    {
+        public List<AccountSearchDTO>? Results { get; set; }
+        public List<AccountSearchDTO>? Options { get; set; }
+        public bool HasMore { get; set; } = false;
+        public int Page { get; set; }
+        public int PerPage { get; set; }
+
     }
 }

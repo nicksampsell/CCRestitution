@@ -18,6 +18,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("_AllowLocalhost", builder =>
+    {
+        var origins = new String[] { "https://localhost:5173", "https://localhost:3000" };
+        builder.WithOrigins(origins)
+            .AllowCredentials()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllersWithViews().AddJsonOptions(options => {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 }).AddRazorOptions(options => {
@@ -68,6 +80,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCors("_AllowLocalhost");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -106,5 +120,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
