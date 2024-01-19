@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using CCRestitution.Interfaces;
 using CCRestitution.Services;
+using CCRestitution.Services.ReportsService;
 
 QuestPDF.Settings.License = LicenseType.Community;
 
@@ -42,6 +43,8 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 {
     options.AreaViewLocationFormats.Add("/Views/Shared/LayoutPartials/{0}.cshtml");
 });
+
+builder.Services.AddScoped<IReportsService, ReportsService>();
 
 builder.Services.AddRazorPages();
 

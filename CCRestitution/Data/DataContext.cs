@@ -52,9 +52,6 @@ namespace CCRestitution.Data
         public DbSet<Payment> Payments { get; set; } = default!;
         public DbSet<ProbationDepartment> ProbationDepartments { get; set; } = default!;
         public DbSet<ProbationOfficer> ProbationOfficers { get; set; } = default!;
-        public DbSet<ReportCriteria> ReportCriteria { get; set; } = default!;
-        public DbSet<ReportField> ReportFields { get; set; } = default!;
-        public DbSet<Report> Reports { get; set; } = default!;
         public DbSet<TreatmentAgency> TreatmentAgencies { get; set; } = default!;
         public DbSet<User> Users { get; set; } = default!;
         public DbSet<Victim> Victims { get; set; } = default!;
