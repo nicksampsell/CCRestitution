@@ -1,126 +1,127 @@
 ﻿using CCRestitution.Data;
 using CCRestitution.ReportsRepository;
 using Microsoft.Identity.Client;
+using QuestPDF.Infrastructure;
 
 namespace CCRestitution.Services.ReportsService
 {
     public partial class ReportsService : IReportsService
     {
-        private readonly DataContext _dataContext;
+        private readonly DataContext _context;
         private readonly ILogger<ReportsService> _logger;
 
         public ReportsService(DataContext dataContext, ILogger<ReportsService> logger)
         {
-            _dataContext = dataContext;
+            _context = dataContext;
             _logger = logger;
         }
 
-        public async Task<byte[]?> GeneratePartialPaymentLetterAsync(int accountNumber)
+        public async Task<IDocument?> GeneratePartialPaymentLetterAsync(int accountNumber)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateFinalRestitutionPaymentLetterAsync(int accountNumber)
+        public async Task<IDocument?> GenerateFinalRestitutionPaymentLetterAsync(int accountNumber)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateDANotificationPaidInFullLetterAsync(int accountNumber)
+        public async Task<IDocument?> GenerateDANotificationPaidInFullLetterAsync(int accountNumber)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateCourtNotificationPaidInFullLetterAsync(int accountNumber)
+        public async Task<IDocument?> GenerateCourtNotificationPaidInFullLetterAsync(int accountNumber)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateRestitutionReportAsync(DateTime startDate, DateTime endDate, bool opened = false)
+        public async Task<IDocument?> GenerateRestitutionReportAsync(DateTime startDate, DateTime endDate, bool opened = false)
         {
             //handle both opened or closed
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateRestitutionByCrimeReportAsync(DateTime startDate, DateTime endDate, bool opened = false)
+        public async Task<IDocument?> GenerateRestitutionByCrimeReportAsync(DateTime startDate, DateTime endDate, bool opened = false)
         {
             //handle both opened or closed
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
 
 
         }
 
-        public async Task<byte[]?> GeneratePORestitutionListAsync(DateTime? startDate)
+        public async Task<IDocument?> GeneratePORestitutionListAsync(DateTime? startDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateMonthlyDSSReportAsync(DateTime? startDate)
+        public async Task<IDocument?> GenerateMonthlyDSSReportAsync(DateTime? startDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateEMMonthlyFeesCollectedAsync(DateTime? startdate)
+        public async Task<IDocument?> GenerateEMMonthlyFeesCollectedAsync(DateTime? startdate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateDPCA30AAsync(DateTime runDate, DateTime startDate, DateTime endDate)
+        public async Task<IDocument?> GenerateDPCA30AAsync(DateTime runDate, DateTime startDate, DateTime endDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateCasesClosedByCrimeCrossTabAsync(DateTime startDate, DateTime endDate)
+        public async Task<IDocument?> GenerateCasesClosedByCrimeCrossTabAsync(DateTime startDate, DateTime endDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateCollectionsByCourtAsync(DateTime startDate, DateTime endDate)
+        public async Task<IDocument?> GenerateCollectionsByCourtAsync(DateTime startDate, DateTime endDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateDisbursementsByCourtAsync(DateTime startDate, DateTime endDate)
+        public async Task<IDocument?> GenerateDisbursementsByCourtAsync(DateTime startDate, DateTime endDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateNumAccountsOpenedInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false)
-        {
-            //handle both opened or closed
-            byte[]? result = null;
-            return result;
-        }
-
-        public async Task<byte[]?> GenerateNumAccountsInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false)
+        public async Task<IDocument?> GenerateNumAccountsOpenedInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false)
         {
             //handle both opened or closed
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateNumAccountsInCriminalCourt(DateTime startDate, DateTime endDate, bool opened = false)
+        public async Task<IDocument?> GenerateNumAccountsInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false)
         {
             //handle both opened or closed
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> GenerateAccountsAssignedToIndividual(int UserId)
+        public async Task<IDocument?> GenerateNumAccountsInCriminalCourt(DateTime startDate, DateTime endDate, bool opened = false)
         {
-            byte[]? result = null;
+            //handle both opened or closed
+            IDocument? result = null;
+            return result;
+        }
+
+        public async Task<IDocument?> GenerateAccountsAssignedToIndividual(int UserId)
+        {
+            IDocument? result = null;
             return result;
         }
 

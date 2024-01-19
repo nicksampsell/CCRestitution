@@ -7,6 +7,7 @@ namespace CCRestitution.Models
     {
         public int MoneyOrderedId { get; set; }
         public int? AccountId { get; set; }
+        public Account? Account { get; set; }
         public int? LegacyAccountNumber { get; set; }
         public DateTime? DateOpened { get; set; }
         public DateTime? DateClosed { get; set; }

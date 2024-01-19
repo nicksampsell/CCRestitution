@@ -31,9 +31,13 @@ namespace CCRestitution.Area.Reports.Controllers
         }
 
 
-        [HttpGet("GenerateReport/{ReportName}/{StartDate}/{EndDate?}")]
+        [HttpGet("/Reports/Generate/{ReportName}/{StartDate}/{EndDate?}")]
         public async Task<IActionResult> GenerateReport(string ReportName, DateTime StartDate, DateTime? EndDate)
         {
+            var document = await _reportsService.LogDischTransMoAsync(StartDate, EndDate);
+            //document.GeneratePdf();
+            document.ShowInPreviewer();
+
             return Ok();
         }
 

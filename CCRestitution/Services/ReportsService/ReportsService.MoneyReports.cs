@@ -1,109 +1,166 @@
 ﻿using CCRestitution.Data;
+using CCRestitution.PdfImplementation.DocumentModels;
+using CCRestitution.ReportsRepository;
+using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 
 namespace CCRestitution.Services.ReportsService
 {
     public partial class ReportsService : IReportsService
     {
 
-        public async Task<byte[]?> LogDiscTransMoAsync(DateTime? startdate, DateTime? endDate)
+        public async Task<IDocument?> LogDischTransMoAsync(DateTime? startdate, DateTime? endDate)
         {
-            byte[]? result = null;
+
+            if(endDate == null)
+            {
+                endDate = DateTime.Now;
+            }
+
+            var data = await _context.MoneyOrdered.Include(x => x.Account).ThenInclude(x => x.Defendants).Include(x => x.Account).ThenInclude(x => x.Court).Where(x => x.RestitutionDateOpened <= startdate && (x.RestitutionClosedDate >= endDate || x.RestitutionClosedDate == null)).Select(x => new List<string>
+            {
+                x.Account.Defendants.Select(x => x.FullName).FirstOrDefault(),
+                x.Account.AccountId.ToString() ?? "",
+                x.Account.CaseNumber.ToString() ?? "",
+                "",
+                "",
+                x.Account.Court.Title.ToString() ?? "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            }).ToListAsync();
+            var report = new SimpleTableReport(
+            
+                new ReportDataModel() { 
+                    Title = "Log Discharge/Trans MO",
+                    StartDate = startdate.GetValueOrDefault(),
+                    EndDate = endDate.GetValueOrDefault(),
+                    DisplayDateAsSpan = true,
+                    Margin = 0.25f,
+                    Orientation = ReportOrientation.Landscape
+                    
+                },
+                new TableReportModel()
+                {
+                    ColumnNames = {
+                        new ColumnDefinition("Name" , "Constant", 100),
+                        new ColumnDefinition("Account No"),
+                        new ColumnDefinition("Case No"),
+                        new ColumnDefinition("PO Assigned"),
+                        new ColumnDefinition("Prob Dt"),
+                        new ColumnDefinition("Conv. Court"),
+                        new ColumnDefinition("Type"),
+                        new ColumnDefinition("Disc. Type"),
+                        new ColumnDefinition("Dt"),
+                        new ColumnDefinition("Trans Out Accepted"),
+                        new ColumnDefinition("To"),
+                        new ColumnDefinition("Jurisdiction Type"),
+                    },
+                    Data = data,
+                    FooterContent = ""
+                }
+            );
+
+
+            return report;
+        }
+
+        public async Task<IDocument?> LogMoneyOrderedAsync(DateTime? startdate, DateTime? endDate)
+        {
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> LogMoneyOrderedAsync(DateTime? startdate, DateTime? endDate)
+        public async Task<IDocument?> MonthlyChangeLogAsync(DateTime? startdate, DateTime? endDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> MonthlyChangeLogAsync(DateTime? startdate, DateTime? endDate)
+        public async Task<IDocument?> FindMOReceiptAsync(int? receiptId, DateTime? ReceiptDate, int? checkNumber, int? supvFeeId, DateTime? supvFeeDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> FindMOReceiptAsync(int? receiptId, DateTime? ReceiptDate, int? checkNumber, int? supvFeeId, DateTime? supvFeeDate)
+        public async Task<IDocument?> SupvFeeYTDStatusAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> SupvFeeYTDStatusAsync(DateTime? runDate)
+        public async Task<IDocument?> SupvFeeYTDStatusDetailAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> SupvFeeYTDStatusDetailAsync(DateTime? runDate)
+        public async Task<IDocument?> CheckReconAsync(bool sortByDate = false)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> CheckReconAsync(bool sortByDate = false)
+        public async Task<IDocument?> CrossFootTotalsAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> CrossFootTotalsAsync(DateTime? runDate)
+        public async Task<IDocument?> VerifyTotalsPaidAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> VerifyTotalsPaidAsync(DateTime? runDate)
+        public async Task<IDocument?> VerifyAmountsDiffAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> VerifyAmountsDiffAsync(DateTime? runDate)
+        public async Task<IDocument?> MOPOCollectedAsync(int userId, DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> MOPOCollectedAsync(int userId, DateTime? runDate)
+        public async Task<IDocument?> MOPODischargedAsync(int userId, DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> MOPODischargedAsync(int userId, DateTime? runDate)
+        public async Task<IDocument?> BalanceMoneyReceivedAsync(int? userId, DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> BalanceMoneyReceivedAsync(int? userId, DateTime? runDate)
+        public async Task<IDocument?> DepositReportAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> DepositReportAsync(DateTime? runDate)
+        public async Task<IDocument?> CheckProcessingReportAsync(DateTime? runDate)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> CheckProcessingReportAsync(DateTime? runDate)
+        public async Task<IDocument?> VictimCheckRunAsync(DateTime? runDate, int startCheckNum)
         {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
 
-        public async Task<byte[]?> VictimCheckRunAsync(DateTime? runDate, int startCheckNum)
+        public async Task<IDocument?> GenerateEnvelopesAsync(DateTime? runDate)
         {
-            byte[]? result = null;
-            return result;
-        }
-
-        public async Task<byte[]?> GenerateEnvelopesAsync(DateTime? runDate)
-        {
-            byte[]? result = null;
+            IDocument? result = null;
             return result;
         }
     }

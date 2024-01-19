@@ -1,6 +1,8 @@
 ﻿using CCRestitution.PdfImplementation.DocumentModels;
 using QuestPDF.Fluent;
+using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using System.Drawing.Printing;
 
 namespace CCRestitution.PdfImplementation.Templates
 {
@@ -17,50 +19,60 @@ namespace CCRestitution.PdfImplementation.Templates
         public DocumentSettings GetSettings() => DocumentSettings.Default;
 
 
-        public void Compose(IDocumentContainer container)
+        public virtual void Compose(IDocumentContainer container)
         {
             container.Page(page =>
             {
-                page.Margin(0.5f, Unit.Inch);
+                page.Margin(Model.Margin, Model.MarginUnit);
+                if(Model.Orientation == ReportOrientation.Landscape)
+                {
+                    page.Size(PageSizes.Letter.Landscape());
+                }
+                else
+                {
+                    page.Size(PageSizes.Letter.Portrait());
+                }
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeContent);
                 page.Footer().Element(ComposeFooter);
             });
         }
 
-        void ComposeContent(IContainer container)
+        public virtual void ComposeContent(IContainer container)
         {
             container.PaddingVertical(40).Placeholder();
         }
 
-        void ComposeHeader(IContainer container)
+        public virtual void ComposeHeader(IContainer container)
         {
+            var titleStyle = TextStyle.Default.FontSize(20).SemiBold().FontColor(Colors.Blue.Darken3);
+
             container.ShowOnce().Row(row =>
             {
                 row.RelativeItem().AlignCenter().Column(column =>
                 {
-                    column.Item().Text(Model.Title);
+                    column.Item().AlignCenter().Text(Model.Title).Style(titleStyle);
 
                     if (Model.DisplayDateAsSpan)
                     {
-                        column.Item().Text($"{Model.StartDate.ToString(Model.DateFormat)} - {Model.EndDate.ToString(Model.DateFormat)}");
+                        column.Item().AlignCenter().Text($"{Model.StartDate.ToString(Model.DateFormat)} - {Model.EndDate.ToString(Model.DateFormat)}");
                     }
                     else
                     {
-                        column.Item().Text(Model.StartDate.ToString(Model.DateFormat));
+                        column.Item().AlignCenter().Text(Model.StartDate.ToString(Model.DateFormat));
                     }
 
                 });
             });
         }
 
-        void ComposeFooter(IContainer container)
+        public virtual void ComposeFooter(IContainer container)
         {
             container.Row(row =>
             {
                 row.RelativeItem().Column(column =>
                 {
-                    column.Item().Text(text =>
+                    column.Item().AlignBottom().Text(text =>
                     {
                         text.Span("Generated On: ");
                         text.Span(Model.GeneratedDate.ToString(Model.GeneratedDateFormat)).Italic();
@@ -75,7 +87,7 @@ namespace CCRestitution.PdfImplementation.Templates
                     }
                 });
 
-                row.RelativeItem().Text(text =>
+                row.AutoItem().AlignRight().AlignBottom().Text(text =>
                 {
                     text.CurrentPageNumber();
                     text.Span(" / ");

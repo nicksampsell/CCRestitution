@@ -1,41 +1,43 @@
 ﻿
+using QuestPDF.Infrastructure;
+
 namespace CCRestitution.Services.ReportsService
 {
     public interface IReportsService
     {
-        Task<byte[]?> BalanceMoneyReceivedAsync(int? userId, DateTime? runDate);
-        Task<byte[]?> CheckProcessingReportAsync(DateTime? runDate);
-        Task<byte[]?> CheckReconAsync(bool sortByDate = false);
-        Task<byte[]?> CrossFootTotalsAsync(DateTime? runDate);
-        Task<byte[]?> DepositReportAsync(DateTime? runDate);
-        Task<byte[]?> FindMOReceiptAsync(int? receiptId, DateTime? ReceiptDate, int? checkNumber, int? supvFeeId, DateTime? supvFeeDate);
-        Task<byte[]?> GenerateAccountsAssignedToIndividual(int UserId);
-        Task<byte[]?> GenerateCasesClosedByCrimeCrossTabAsync(DateTime startDate, DateTime endDate);
-        Task<byte[]?> GenerateCollectionsByCourtAsync(DateTime startDate, DateTime endDate);
-        Task<byte[]?> GenerateCourtNotificationPaidInFullLetterAsync(int accountNumber);
-        Task<byte[]?> GenerateDANotificationPaidInFullLetterAsync(int accountNumber);
-        Task<byte[]?> GenerateDisbursementsByCourtAsync(DateTime startDate, DateTime endDate);
-        Task<byte[]?> GenerateDPCA30AAsync(DateTime runDate, DateTime startDate, DateTime endDate);
-        Task<byte[]?> GenerateEMMonthlyFeesCollectedAsync(DateTime? startdate);
-        Task<byte[]?> GenerateEnvelopesAsync(DateTime? runDate);
-        Task<byte[]?> GenerateFinalRestitutionPaymentLetterAsync(int accountNumber);
-        Task<byte[]?> GenerateMonthlyDSSReportAsync(DateTime? startDate);
-        Task<byte[]?> GenerateNumAccountsInCriminalCourt(DateTime startDate, DateTime endDate, bool opened = false);
-        Task<byte[]?> GenerateNumAccountsInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false);
-        Task<byte[]?> GenerateNumAccountsOpenedInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false);
-        Task<byte[]?> GeneratePartialPaymentLetterAsync(int accountNumber);
-        Task<byte[]?> GeneratePORestitutionListAsync(DateTime? startDate);
-        Task<byte[]?> GenerateRestitutionByCrimeReportAsync(DateTime startDate, DateTime endDate, bool opened = false);
-        Task<byte[]?> GenerateRestitutionReportAsync(DateTime startDate, DateTime endDate, bool opened = false);
-        Task<byte[]?> LogDiscTransMoAsync(DateTime? startdate, DateTime? endDate);
-        Task<byte[]?> LogMoneyOrderedAsync(DateTime? startdate, DateTime? endDate);
-        Task<byte[]?> MonthlyChangeLogAsync(DateTime? startdate, DateTime? endDate);
-        Task<byte[]?> MOPOCollectedAsync(int userId, DateTime? runDate);
-        Task<byte[]?> MOPODischargedAsync(int userId, DateTime? runDate);
-        Task<byte[]?> SupvFeeYTDStatusAsync(DateTime? runDate);
-        Task<byte[]?> SupvFeeYTDStatusDetailAsync(DateTime? runDate);
-        Task<byte[]?> VerifyAmountsDiffAsync(DateTime? runDate);
-        Task<byte[]?> VerifyTotalsPaidAsync(DateTime? runDate);
-        Task<byte[]?> VictimCheckRunAsync(DateTime? runDate, int startCheckNum);
+        Task<IDocument?> BalanceMoneyReceivedAsync(int? userId, DateTime? runDate);
+        Task<IDocument?> CheckProcessingReportAsync(DateTime? runDate);
+        Task<IDocument?> CheckReconAsync(bool sortByDate = false);
+        Task<IDocument?> CrossFootTotalsAsync(DateTime? runDate);
+        Task<IDocument?> DepositReportAsync(DateTime? runDate);
+        Task<IDocument?> FindMOReceiptAsync(int? receiptId, DateTime? ReceiptDate, int? checkNumber, int? supvFeeId, DateTime? supvFeeDate);
+        Task<IDocument?> GenerateAccountsAssignedToIndividual(int UserId);
+        Task<IDocument?> GenerateCasesClosedByCrimeCrossTabAsync(DateTime startDate, DateTime endDate);
+        Task<IDocument?> GenerateCollectionsByCourtAsync(DateTime startDate, DateTime endDate);
+        Task<IDocument?> GenerateCourtNotificationPaidInFullLetterAsync(int accountNumber);
+        Task<IDocument?> GenerateDANotificationPaidInFullLetterAsync(int accountNumber);
+        Task<IDocument?> GenerateDisbursementsByCourtAsync(DateTime startDate, DateTime endDate);
+        Task<IDocument?> GenerateDPCA30AAsync(DateTime runDate, DateTime startDate, DateTime endDate);
+        Task<IDocument?> GenerateEMMonthlyFeesCollectedAsync(DateTime? startdate);
+        Task<IDocument?> GenerateEnvelopesAsync(DateTime? runDate);
+        Task<IDocument?> GenerateFinalRestitutionPaymentLetterAsync(int accountNumber);
+        Task<IDocument?> GenerateMonthlyDSSReportAsync(DateTime? startDate);
+        Task<IDocument?> GenerateNumAccountsInCriminalCourt(DateTime startDate, DateTime endDate, bool opened = false);
+        Task<IDocument?> GenerateNumAccountsInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false);
+        Task<IDocument?> GenerateNumAccountsOpenedInFamilyCourtAsync(DateTime startDate, DateTime endDate, bool opened = false);
+        Task<IDocument?> GeneratePartialPaymentLetterAsync(int accountNumber);
+        Task<IDocument?> GeneratePORestitutionListAsync(DateTime? startDate);
+        Task<IDocument?> GenerateRestitutionByCrimeReportAsync(DateTime startDate, DateTime endDate, bool opened = false);
+        Task<IDocument?> GenerateRestitutionReportAsync(DateTime startDate, DateTime endDate, bool opened = false);
+        Task<IDocument?> LogDischTransMoAsync(DateTime? startdate, DateTime? endDate);
+        Task<IDocument?> LogMoneyOrderedAsync(DateTime? startdate, DateTime? endDate);
+        Task<IDocument?> MonthlyChangeLogAsync(DateTime? startdate, DateTime? endDate);
+        Task<IDocument?> MOPOCollectedAsync(int userId, DateTime? runDate);
+        Task<IDocument?> MOPODischargedAsync(int userId, DateTime? runDate);
+        Task<IDocument?> SupvFeeYTDStatusAsync(DateTime? runDate);
+        Task<IDocument?> SupvFeeYTDStatusDetailAsync(DateTime? runDate);
+        Task<IDocument?> VerifyAmountsDiffAsync(DateTime? runDate);
+        Task<IDocument?> VerifyTotalsPaidAsync(DateTime? runDate);
+        Task<IDocument?> VictimCheckRunAsync(DateTime? runDate, int startCheckNum);
     }
 }
